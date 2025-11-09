@@ -34,8 +34,8 @@ struct LockDashboardView: View {
                         NavigationLink(destination: LockDashboardView()) {
                             Label("Lock Dashboard", systemImage: "lock")
                         }
-                        NavigationLink(destination: BlockSitesView()) {
-                            Label("Block Sites", systemImage: "globe")
+                        NavigationLink(destination: BlockingView(subscription: .free)) {
+                            Label("Blocking", systemImage: "globe")
                         }
                         NavigationLink(destination: PartnerSettingsScreen()) {
                             Label("Partner & Settings", systemImage: "person.2")

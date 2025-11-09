@@ -7,11 +7,11 @@ struct BlockSitesView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 // Reuse the existing blocked apps/sites management UI
-                BlockedAppsView(subscription: subscription)
+                BlockingView(subscription: subscription)
             }
             .padding()
         }
-        .navigationTitle("Block Sites")
+        .navigationTitle("Blocking")
     }
 }
 
