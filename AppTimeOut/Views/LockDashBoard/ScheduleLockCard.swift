@@ -8,11 +8,12 @@ private enum GuardianScheduleAction {
 struct ScheduleLockCard: View {
 
     // 1 = Mon ... 7 = Sun
-    @State private var selectedDays: Set<Int> = [1]
+    @State private var selectedDays: Set<Int> = Set(1...7)
     @State private var startTime: Date = Calendar.current.date(
         bySettingHour: 8, minute: 0, second: 0, of: .now)!
     @State private var endTime: Date = Calendar.current.date(
         bySettingHour: 17, minute: 0, second: 0, of: .now)!
+    @State private var weeklyRepeat: Bool = true
 
     @State private var isSelfLockEnabled = false
     @State private var isGuardianEnabled = false
@@ -23,8 +24,14 @@ struct ScheduleLockCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Schedule")
-                .font(.headline)
+            HStack(spacing: 8) {
+                Text("Schedule")
+                    .font(.headline)
+                Spacer()
+                Text(helperText)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
 
             // Days row
             HStack(spacing: 0) {
@@ -34,6 +41,13 @@ struct ScheduleLockCard: View {
                 }
                 Spacer(minLength: 0)
             }
+
+            // Weekly repeat toggle (native switch)
+            Toggle(isOn: $weeklyRepeat) {
+                Text("Weekly")
+            }
+            .tint(Color.accentColor)
+            .font(.subheadline)
 
             // Time range
             HStack {
@@ -76,9 +90,6 @@ struct ScheduleLockCard: View {
                     .clipShape(RoundedRectangle(cornerRadius: 14))
             }
 
-            Text(helperText)
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
         .padding()
         .background(.thinMaterial)
@@ -119,13 +130,36 @@ struct ScheduleLockCard: View {
     // MARK: - Helper text
 
     private var helperText: String {
-        if isGuardianEnabled {
-            return "Guardian lock: disabling or changing this schedule can be protected by a code."
-        } else if isSelfLockEnabled {
-            return "Self-lock schedule active for selected days."
-        } else {
-            return "Pick days and times, then enable Self-Lock. Premium later: per-day custom schedules."
+        selectedDaysLabel
+    }
+
+    // MARK: - Selected days label
+    private var selectedDaysLabel: String {
+        let fullNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        let shortNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+        let sortedDays = selectedDays.sorted()
+
+        // No days selected: provide a neutral prompt
+        if sortedDays.isEmpty {
+            return weeklyRepeat ? "Everyday" : "All days"
         }
+
+        // All 7 days
+        if sortedDays.count == 7 {
+            return weeklyRepeat ? "Everyday" : "All days"
+        }
+
+        // Single day
+        if sortedDays.count == 1, let day = sortedDays.first {
+            let index = day - 1
+            let name = fullNames[index]
+            return weeklyRepeat ? "Every \(name)" : name
+        }
+
+        // Multiple specific days
+        let names = sortedDays.map { shortNames[$0 - 1] }.joined(separator: ", ")
+        return weeklyRepeat ? "Every \(names)" : names
     }
 
     // MARK: - Toggle logic
@@ -181,4 +215,3 @@ struct ScheduleLockCard: View {
         pendingGuardianAction = nil
     }
 }
-
