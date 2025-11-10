@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LockDashboardView: View {
     // Track current subscription state for the dashboard
-    @State private var subscription: SubscriptionLevel = .free
+    @State private var subscription: SubscriptionLevel = .premium
 
     var body: some View {
         NavigationStack {
@@ -34,8 +34,8 @@ struct LockDashboardView: View {
                         NavigationLink(destination: LockDashboardView()) {
                             Label("Lock Dashboard", systemImage: "lock")
                         }
-                        NavigationLink(destination: BlockingView(subscription: .free)) {
-                            Label("Blocking", systemImage: "globe")
+                        NavigationLink(destination: BlockingView(subscription: subscription)) {
+                            Label("Manage Blocks", systemImage: "globe")
                         }
                         NavigationLink(destination: PartnerSettingsScreen()) {
                             Label("Partner & Settings", systemImage: "person.2")
@@ -49,6 +49,7 @@ struct LockDashboardView: View {
                 }
             }
         }
+        .onAppear { subscription = .premium }
     }
 }
 
