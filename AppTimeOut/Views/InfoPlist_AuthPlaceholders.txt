@@ -1,0 +1,20 @@
+Google Integration Info.plist Placeholders:
+- URL Types:
+  - Identifier: com.googleusercontent.apps.YOUR_CLIENT_ID
+  - URL Schemes: REVERSED_CLIENT_ID (from GoogleService-Info.plist)
+- GIDClientID (String): YOUR_CLIENT_ID (if using manual configuration)
+
+Facebook Integration Info.plist Placeholders:
+- FacebookAppID (String): YOUR_FACEBOOK_APP_ID
+- FacebookDisplayName (String): YourAppName
+- LSApplicationQueriesSchemes (Array):
+  - fbapi
+  - fb-messenger-share-api
+  - fbauth2
+  - fbshareextension
+- URL Types:
+  - URL Scheme: fbYOUR_FACEBOOK_APP_ID
+
+Note:
+Replace all placeholders with your actual values.
+Ensure your SceneDelegate or App lifecycle code forwards openURL callbacks to the corresponding SDKs.
