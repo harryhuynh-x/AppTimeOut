@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct LockDashboardView: View {
-    // Track current subscription state for the dashboard
-    @State private var subscription: SubscriptionLevel = .premium
+    @EnvironmentObject var subs: SubscriptionManager
+
+    private var currentLevel: SubscriptionLevel { subs.tier == .free ? .free : .premium }
 
     var body: some View {
         NavigationStack {
@@ -31,17 +32,11 @@ struct LockDashboardView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        NavigationLink(destination: LockDashboardView()) {
-                            Label("Lock Dashboard", systemImage: "lock")
-                        }
-                        NavigationLink(destination: BlockingView(subscription: subscription)) {
+                        NavigationLink(destination: BlockingView(subscription: currentLevel)) {
                             Label("Manage Blocks", systemImage: "globe")
                         }
-                        NavigationLink(destination: PartnerSettingsScreen()) {
-                            Label("Partner & Settings", systemImage: "person.2")
-                        }
-                        NavigationLink(destination: PremiumScreen()) {
-                            Label("Go Premium", systemImage: "star.circle")
+                        NavigationLink(destination: ProfileScreen()) {
+                            Label("Profile", systemImage: "person.crop.circle")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -49,7 +44,6 @@ struct LockDashboardView: View {
                 }
             }
         }
-        .onAppear { subscription = .premium }
     }
 }
 

@@ -167,9 +167,9 @@ struct ScheduleLockCard: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(isGuardianEnabled
-                                ? Color.orange.opacity(0.2)
-                                : Color.orange)
-                    .foregroundStyle(isGuardianEnabled ? Color.orange : .white)
+                                ? Color(red: 1.0, green: 0.647, blue: 0.0).opacity(0.2)
+                                : Color(red: 1.0, green: 0.647, blue: 0.0))
+                    .foregroundStyle(isGuardianEnabled ? Color(red: 1.0, green: 0.647, blue: 0.0) : .white)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
             }
 
@@ -177,6 +177,7 @@ struct ScheduleLockCard: View {
         .padding()
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+        //.foregroundStyle(.primary) // Removed as per instructions
         .sheet(isPresented: $showUnlockSheet) {
             UnlockSheetView {
                 handleGuardianSuccess()

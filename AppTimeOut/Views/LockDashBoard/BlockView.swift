@@ -6,7 +6,7 @@
 //
 //  Key Features:
 //  - Split into two sections: Apps and Websites, each with list, empty state, and add/remove.
-//  - Subscription badge and messaging (Free vs Premium) at the top.
+//  - Subscription badge and messaging (Free vs Premium tier) at the top.
 //  - Edit mode via toolbar for deletions.
 //
 //  Notes:

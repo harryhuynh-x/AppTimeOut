@@ -15,7 +15,7 @@ struct PartnerSettingsView: View {
 
                 Text(subscription == .free
                      ? "Free: 1 partner."
-                     : "Premium: multiple partners.")
+                     : "Profile: multiple partners.")
                     .font(.subheadline)
 
                 Spacer()

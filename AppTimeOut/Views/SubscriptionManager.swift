@@ -1,86 +1,101 @@
-import StoreKit
+import Foundation
 import SwiftUI
+import Combine
+import StoreKit
+import UIKit
 
-public enum SubscriptionTier {
+public enum SubscriptionTier: String, CustomStringConvertible {
     case free
     case premiumMonthly
     case premiumYearly
+    
+    public var description: String {
+        switch self {
+        case .free:
+            return "Free"
+        case .premiumMonthly:
+            return "Premium — Monthly"
+        case .premiumYearly:
+            return "Premium — Yearly"
+        }
+    }
 }
 
 @MainActor
 public final class SubscriptionManager: ObservableObject {
     public static let shared = SubscriptionManager()
     
+    #if DEBUG
+    // Toggle this to true to simulate Premium during development
+    public var debugForcePremium: Bool = true
+    #endif
+    
     @Published public private(set) var tier: SubscriptionTier = .free
     @Published public private(set) var expirationDate: Date? = nil
     @Published public private(set) var products: [Product] = []
     
-    let monthlyID = "com.example.app.premium.monthly"
-    let yearlyID = "com.example.app.premium.yearly"
+    private let monthlyID = "com.example.app.premium.monthly"
+    private let yearlyID = "com.example.app.premium.yearly"
+    
+    private init() {}
     
     public func loadProducts() async {
+        let ids = Set([monthlyID, yearlyID])
         do {
-            let products = try await Product.products(for: [monthlyID, yearlyID])
-            self.products = products
+            let fetched = try await Product.products(for: ids)
+            self.products = fetched
         } catch {
             self.products = []
         }
     }
     
     public func refreshEntitlements() async {
-        var foundTransaction: Transaction? = nil
-        for await verificationResult in Transaction.currentEntitlements {
-            switch verificationResult {
-            case .verified(let transaction):
-                if transaction.productID == monthlyID || transaction.productID == yearlyID {
-                    if let current = foundTransaction {
-                        if let currentExpiration = current.expirationDate,
-                           let newExpiration = transaction.expirationDate,
-                           newExpiration > currentExpiration {
-                            foundTransaction = transaction
+        #if DEBUG
+        if debugForcePremium {
+            // Simulate a premium entitlement locally for testing
+            self.tier = .premiumMonthly
+            self.expirationDate = Calendar.current.date(byAdding: .month, value: 1, to: .now)
+            return
+        }
+        #endif
+        
+        do {
+            var best: StoreKit.Transaction? = nil
+            for await ent in StoreKit.Transaction.currentEntitlements {
+                if case .verified(let t) = ent {
+                    if t.productID == monthlyID || t.productID == yearlyID {
+                        if best == nil || (best!.purchaseDate < t.purchaseDate) {
+                            best = t
                         }
-                    } else {
-                        foundTransaction = transaction
                     }
                 }
-            case .unverified:
-                continue
             }
-        }
-        
-        if let transaction = foundTransaction {
-            updateTier(from: transaction)
-        } else {
-            tier = .free
-            expirationDate = nil
+            if let t = best {
+                updateTier(from: t)
+            } else {
+                self.tier = .free
+                self.expirationDate = nil
+            }
         }
     }
     
     public func purchaseMonthly() async throws {
-        guard let product = products.first(where: { $0.id == monthlyID }) else { return }
-        let result = try await product.purchase()
-        switch result {
-        case .success(let verification):
-            let transaction = try verification.payloadValue()
-            await refreshEntitlements()
-            await transaction.finish()
-        case .userCancelled:
-            break
-        case .pending:
-            break
-        @unknown default:
-            break
-        }
+        try await purchase(productID: monthlyID)
     }
     
     public func purchaseYearly() async throws {
-        guard let product = products.first(where: { $0.id == yearlyID }) else { return }
+        try await purchase(productID: yearlyID)
+    }
+    
+    private func purchase(productID: String) async throws {
+        guard let product = products.first(where: { $0.id == productID }) else { return }
         let result = try await product.purchase()
         switch result {
         case .success(let verification):
-            let transaction = try verification.payloadValue()
-            await refreshEntitlements()
-            await transaction.finish()
+            if case .verified(let transaction) = verification {
+                await transaction.finish()
+                updateTier(from: transaction)
+            }
         case .userCancelled:
             break
         case .pending:
@@ -88,36 +103,44 @@ public final class SubscriptionManager: ObservableObject {
         @unknown default:
             break
         }
-    }
-    
-    public func manageSubscriptions() async {
-        await AppStore.showManageSubscriptions(in: nil)
-    }
-    
-    public func restore() async {
-        _ = try? await Transaction.latest(for: monthlyID)
-        _ = try? await Transaction.latest(for: yearlyID)
         await refreshEntitlements()
     }
     
-    private func updateTier(from transaction: Transaction) {
-        guard let subscriptionInfo = transaction.subscriptionInfo else {
-            tier = .free
-            expirationDate = nil
-            return
+    @MainActor
+    public func manageSubscriptions() async {
+        do {
+            if let scene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }) {
+                try await AppStore.showManageSubscriptions(in: scene)
+            } else if let anyScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                try await AppStore.showManageSubscriptions(in: anyScene)
+            } else {
+                // No available UIWindowScene to present manage subscriptions.
+                // Consider presenting an alert to the user.
+            }
+        } catch {
+            // Handle error if needed
         }
-        let currentProductID = subscriptionInfo.renewalInfo.currentProductID
-        if currentProductID == monthlyID {
-            tier = .premiumMonthly
-        } else if currentProductID == yearlyID {
-            tier = .premiumYearly
+    }
+    
+    @MainActor
+    public func restore() async {
+        await refreshEntitlements()
+    }
+    
+    private func updateTier(from transaction: StoreKit.Transaction) {
+        if transaction.productID == monthlyID {
+            self.tier = .premiumMonthly
+        } else if transaction.productID == yearlyID {
+            self.tier = .premiumYearly
         } else {
-            tier = .free
+            self.tier = .free
         }
-        expirationDate = transaction.expirationDate
+        self.expirationDate = transaction.expirationDate
     }
 }
 
 #Preview {
-    Text("Subscription Tier: \(SubscriptionManager.shared.tier)")
+    Text(SubscriptionManager.shared.tier.description)
 }
