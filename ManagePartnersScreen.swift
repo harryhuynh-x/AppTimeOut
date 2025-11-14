@@ -1,25 +1,31 @@
 import SwiftUI
 
 enum PartnerContactMethod: String, CaseIterable, Identifiable {
-    case name = "Name"
+    case phone = "Phone"
     case email = "Email"
     var id: String { rawValue }
 }
 
 struct ManagePartnersScreen: View {
     @State private var partnerName: String = ""
+    @State private var partnerPhone: String = ""
     @State private var partnerEmail: String = ""
-    @State private var method: PartnerContactMethod = .name
+    @State private var method: PartnerContactMethod = .phone
 
     @State private var showValidation: Bool = false
 
     var body: some View {
         Form {
             Section("Partner Info") {
-                TextField("Name", text: $partnerName)
+                TextField("Name (optional)", text: $partnerName)
                     .textInputAutocapitalization(.words)
                     .autocorrectionDisabled()
-                    .disabled(method != .name)
+
+                TextField("Phone", text: $partnerPhone)
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.phonePad)
+                    .autocorrectionDisabled()
+                    .disabled(method != .phone)
 
                 TextField("Email", text: $partnerEmail)
                     .textInputAutocapitalization(.never)
@@ -36,9 +42,9 @@ struct ManagePartnersScreen: View {
                 }
                 .pickerStyle(.segmented)
 
-                Text(method == .name
-                     ? "We will use the partner's name as the contact identifier for unlock codes."
-                     : "We will use the partner's email as the contact identifier for unlock codes.")
+                Text(method == .phone
+                     ? "We will use the partner's phone number to deliver unlock codes."
+                     : "We will use the partner's email address to deliver unlock codes.")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
             }
@@ -56,7 +62,7 @@ struct ManagePartnersScreen: View {
                     if isValid {
                         // Persist the partner data and method selection.
                         // TODO: Hook into your persistence layer / settings model.
-                        // Example: PartnerSettings.shared.save(name: partnerName, email: partnerEmail, method: method)
+                        // Example: PartnerSettings.shared.save(name: partnerName, phone: partnerPhone, email: partnerEmail, method: method)
                     } else {
                         showValidation = true
                     }
@@ -72,8 +78,8 @@ struct ManagePartnersScreen: View {
 
     private var isValid: Bool {
         switch method {
-        case .name:
-            return !partnerName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        case .phone:
+            return isValidPhone(partnerPhone)
         case .email:
             return isValidEmail(partnerEmail)
         }
@@ -81,11 +87,16 @@ struct ManagePartnersScreen: View {
 
     private var validationMessage: String? {
         switch method {
-        case .name:
-            return partnerName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Please enter a partner name." : nil
+        case .phone:
+            return isValidPhone(partnerPhone) ? nil : "Please enter a valid phone number."
         case .email:
             return isValidEmail(partnerEmail) ? nil : "Please enter a valid email address."
         }
+    }
+
+    private func isValidPhone(_ s: String) -> Bool {
+        let digits = s.filter { $0.isNumber }
+        return digits.count >= 7
     }
 
     private func isValidEmail(_ s: String) -> Bool {

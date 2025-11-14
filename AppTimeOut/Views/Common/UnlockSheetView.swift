@@ -16,7 +16,7 @@ struct UnlockSheetView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
-                Text("Guardian Code")
+                Text("Partner Code")
                     .font(.headline)
 
                 SecureField("Enter code", text: $code)

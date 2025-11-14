@@ -1,8 +1,13 @@
 import Combine
 import SwiftUI
+import FirebaseCore
 
 @main
 struct AppTimeOutApp: App {
+    init() {
+        FirebaseApp.configure()
+    }
+    
     @StateObject private var subscriptionManager = SubscriptionManager.shared
     
     var body: some Scene {

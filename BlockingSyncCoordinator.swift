@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 @MainActor
 final class BlockingSyncCoordinator: ObservableObject {
@@ -13,11 +14,15 @@ final class BlockingSyncCoordinator: ObservableObject {
 
     init(
         local: BlockingStore = BlockingLocalStore(),
-        api: BlockingAPI = BlockingAPIStub(),
+        api: BlockingAPI? = nil,
         userIDProvider: @escaping () -> String? = { nil }
     ) {
         self.local = local
-        self.api = api
+        #if canImport(FirebaseAuth) && canImport(FirebaseFirestore)
+        self.api = api ?? FirebaseBlockingAPI()
+        #else
+        self.api = api ?? BlockingAPIStub()
+        #endif
         self.userIDProvider = userIDProvider
     }
 
@@ -46,7 +51,7 @@ final class BlockingSyncCoordinator: ObservableObject {
     func addApp(_ app: BlockedApp) async {
         let uid = userIDProvider()
         apps.append(app)
-        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: .now)
+        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: Date())
         try? await local.save(newSnap, for: uid)
 
         if let uid = uid {
@@ -64,7 +69,7 @@ final class BlockingSyncCoordinator: ObservableObject {
     func removeApp(id: UUID) async {
         let uid = userIDProvider()
         apps.removeAll { $0.id == id }
-        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: .now)
+        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: Date())
         try? await local.save(newSnap, for: uid)
 
         if let uid = uid {
@@ -82,7 +87,7 @@ final class BlockingSyncCoordinator: ObservableObject {
     func addWebsite(_ site: BlockedWebsite) async {
         let uid = userIDProvider()
         websites.append(site)
-        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: .now)
+        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: Date())
         try? await local.save(newSnap, for: uid)
 
         if let uid = uid {
@@ -100,7 +105,7 @@ final class BlockingSyncCoordinator: ObservableObject {
     func removeWebsite(id: UUID) async {
         let uid = userIDProvider()
         websites.removeAll { $0.id == id }
-        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: .now)
+        let newSnap = BlockingSnapshot(apps: apps, websites: websites, updatedAt: Date())
         try? await local.save(newSnap, for: uid)
 
         if let uid = uid {

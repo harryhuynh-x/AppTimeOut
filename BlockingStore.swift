@@ -1,30 +1,6 @@
 import Foundation
 
-// Models used by BlockingView
-
-struct BlockedApp: Identifiable, Equatable, Codable {
-    let id: UUID
-    var bundleIdentifier: String
-    var displayName: String
-
-    init(id: UUID = UUID(), bundleIdentifier: String, displayName: String) {
-        self.id = id
-        self.bundleIdentifier = bundleIdentifier
-        self.displayName = displayName
-    }
-}
-
-struct BlockedWebsite: Identifiable, Equatable, Codable {
-    let id: UUID
-    var domain: String
-    var displayName: String
-
-    init(id: UUID = UUID(), domain: String, displayName: String) {
-        self.id = id
-        self.domain = domain
-        self.displayName = displayName
-    }
-}
+// Uses BlockedApp and BlockedWebsite defined in BlockView.swift
 
 struct BlockingSnapshot: Codable, Equatable {
     var apps: [BlockedApp]
@@ -75,7 +51,7 @@ final class BlockingAPIStub: BlockingAPI {
 
     func fetch(for userID: String) async throws -> BlockingSnapshot {
         try await Task.sleep(nanoseconds: 150_000_000)
-        return server[userID] ?? BlockingSnapshot(apps: [], websites: [], updatedAt: .now)
+        return server[userID] ?? BlockingSnapshot(apps: [], websites: [], updatedAt: Date())
     }
 
     func add(app: BlockedApp, for userID: String) async throws -> BlockingSnapshot {
@@ -84,7 +60,7 @@ final class BlockingAPIStub: BlockingAPI {
         if !snap.apps.contains(where: { $0.bundleIdentifier == app.bundleIdentifier }) {
             snap.apps.append(app)
         }
-        snap.updatedAt = .now
+        snap.updatedAt = Date()
         server[userID] = snap
         return snap
     }
@@ -93,7 +69,7 @@ final class BlockingAPIStub: BlockingAPI {
         try await Task.sleep(nanoseconds: 100_000_000)
         var snap = server[userID] ?? BlockingSnapshot(apps: [], websites: [], updatedAt: .distantPast)
         snap.apps.removeAll { $0.id == id }
-        snap.updatedAt = .now
+        snap.updatedAt = Date()
         server[userID] = snap
         return snap
     }
@@ -104,7 +80,7 @@ final class BlockingAPIStub: BlockingAPI {
         if !snap.websites.contains(where: { $0.domain.caseInsensitiveCompare(website.domain) == .orderedSame }) {
             snap.websites.append(website)
         }
-        snap.updatedAt = .now
+        snap.updatedAt = Date()
         server[userID] = snap
         return snap
     }
@@ -113,7 +89,7 @@ final class BlockingAPIStub: BlockingAPI {
         try await Task.sleep(nanoseconds: 100_000_000)
         var snap = server[userID] ?? BlockingSnapshot(apps: [], websites: [], updatedAt: .distantPast)
         snap.websites.removeAll { $0.id == id }
-        snap.updatedAt = .now
+        snap.updatedAt = Date()
         server[userID] = snap
         return snap
     }

@@ -14,12 +14,20 @@
 //
 
 import SwiftUI
+import Foundation
+
+#if canImport(FirebaseAuth)
+import FirebaseAuth
+#endif
 
 struct BlockingView: View {
     let subscription: SubscriptionLevel
 
-    @State private var blockedApps: [BlockedApp] = []
-    @State private var blockedWebsites: [BlockedWebsite] = []
+#if canImport(FirebaseAuth)
+    @StateObject private var sync = BlockingSyncCoordinator(userIDProvider: { Auth.auth().currentUser?.uid })
+#else
+    @StateObject private var sync = BlockingSyncCoordinator()
+#endif
 
     @State private var showingAppPicker: Bool = false
     @State private var appPickerSelection: AppPickerTab = .installed
@@ -54,10 +62,10 @@ struct BlockingView: View {
                 }
 
                 Section("Apps") {
-                    if blockedApps.isEmpty {
+                    if sync.apps.isEmpty {
                         EmptyAppsPlaceholder()
                     } else {
-                        ForEach(blockedApps) { app in
+                        ForEach(sync.apps) { app in
                             HStack(alignment: .center, spacing: 12) {
                                 Image(systemName: "app.fill")
                                     .foregroundStyle(.red)
@@ -80,7 +88,14 @@ struct BlockingView: View {
                                 .clipShape(Capsule())
                             }
                         }
-                        .onDelete(perform: removeApps)
+                        .onDelete { offsets in
+                            let ids = offsets.map { sync.apps[$0].id }
+                            Task {
+                                for id in ids {
+                                    await sync.removeApp(id: id)
+                                }
+                            }
+                        }
                     }
 
                     Button {
@@ -88,14 +103,14 @@ struct BlockingView: View {
                     } label: {
                         Label("Add App", systemImage: "plus.circle.fill")
                     }
-                    .disabled(subscription == .free && blockedApps.count >= 3)
+                    .disabled(subscription == .free && sync.apps.count >= 3)
                 }
 
                 Section("Websites") {
-                    if blockedWebsites.isEmpty {
+                    if sync.websites.isEmpty {
                         EmptyWebsitesPlaceholder()
                     } else {
-                        ForEach(blockedWebsites) { site in
+                        ForEach(sync.websites) { site in
                             HStack(alignment: .center, spacing: 12) {
                                 Image(systemName: "globe")
                                     .foregroundStyle(.red)
@@ -118,7 +133,14 @@ struct BlockingView: View {
                                 .clipShape(Capsule())
                             }
                         }
-                        .onDelete(perform: removeWebsites)
+                        .onDelete { offsets in
+                            let ids = offsets.map { sync.websites[$0].id }
+                            Task {
+                                for id in ids {
+                                    await sync.removeWebsite(id: id)
+                                }
+                            }
+                        }
                     }
 
                     Button {
@@ -126,12 +148,15 @@ struct BlockingView: View {
                     } label: {
                         Label("Add Website", systemImage: "plus.circle.fill")
                     }
-                    .disabled(subscription == .free && blockedWebsites.count >= 3)
+                    .disabled(subscription == .free && sync.websites.count >= 3)
                 }
             }
             .navigationTitle("Manage Blocks")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { EditButton() }
+            .task {
+                await sync.load()
+            }
             .sheet(isPresented: $showingAppPicker) {
                 AppPickerView(
                     selection: $appPickerSelection,
@@ -140,11 +165,13 @@ struct BlockingView: View {
                     appStoreQuery: $appStoreQuery
                 ) { picked in
                     // Add picked app if not already present; enforce free limit of 3
-                    if !blockedApps.contains(where: { $0.bundleIdentifier == picked.bundleIdentifier }) {
-                        if subscription == .free && blockedApps.count >= 3 {
+                    if !sync.apps.contains(where: { $0.bundleIdentifier == picked.bundleIdentifier }) {
+                        if subscription == .free && sync.apps.count >= 3 {
                             // Silently ignore for now; you may show an alert later
                         } else {
-                            blockedApps.append(picked)
+                            Task {
+                                await sync.addApp(picked)
+                            }
                         }
                     }
                     showingAppPicker = false
@@ -191,15 +218,17 @@ struct BlockingView: View {
                             Button("Add") {
                                 let normalized = normalizeDomain(from: websiteInput)
                                 if let domain = normalized {
-                                    if subscription == .free && blockedWebsites.count >= 3 {
+                                    if subscription == .free && sync.websites.count >= 3 {
                                         websiteInputError = "Free limit reached (3 websites)."
-                                    } else if blockedWebsites.contains(where: { $0.domain.caseInsensitiveCompare(domain) == .orderedSame }) {
+                                    } else if sync.websites.contains(where: { $0.domain.caseInsensitiveCompare(domain) == .orderedSame }) {
                                         websiteInputError = "Already in your blocked list."
                                     } else {
-                                        blockedWebsites.append(BlockedWebsite(domain: domain, displayName: prettifyDomain(domain)))
-                                        websiteInput = ""
-                                        websiteInputError = nil
-                                        showingWebsiteEntry = false
+                                        Task {
+                                            await sync.addWebsite(BlockedWebsite(domain: domain, displayName: prettifyDomain(domain)))
+                                            websiteInput = ""
+                                            websiteInputError = nil
+                                            showingWebsiteEntry = false
+                                        }
                                     }
                                 } else {
                                     websiteInputError = "Please enter a valid domain or URL."
@@ -211,30 +240,6 @@ struct BlockingView: View {
                 }
             }
         }
-    }
-
-    // MARK: - Actions
-
-    private func addApp() {
-        if subscription == .free && blockedApps.count >= 3 { return }
-        // TODO: Present an app picker; for now, append a placeholder
-        blockedApps.append(BlockedApp(bundleIdentifier: "com.example.app\(Int.random(in: 100...999))",
-                                      displayName: "Example App"))
-    }
-
-    private func removeApps(at offsets: IndexSet) {
-        blockedApps.remove(atOffsets: offsets)
-    }
-
-    private func addWebsite() {
-        if subscription == .free && blockedWebsites.count >= 3 { return }
-        // TODO: Prompt for a domain; for now, append a placeholder
-        blockedWebsites.append(BlockedWebsite(domain: "example.com",
-                                              displayName: "Example"))
-    }
-
-    private func removeWebsites(at offsets: IndexSet) {
-        blockedWebsites.remove(atOffsets: offsets)
     }
 
     // MARK: - URL/Domain helpers
@@ -267,6 +272,32 @@ struct BlockingView: View {
         // Capitalize first letter, remove www.
         let core = domain.replacingOccurrences(of: "^www\\.", with: "", options: .regularExpression)
         return core.capitalized
+    }
+}
+
+// MARK: - Models
+
+struct BlockedApp: Identifiable, Equatable, Codable {
+    let id: UUID
+    var bundleIdentifier: String
+    var displayName: String
+
+    init(id: UUID = UUID(), bundleIdentifier: String, displayName: String) {
+        self.id = id
+        self.bundleIdentifier = bundleIdentifier
+        self.displayName = displayName
+    }
+}
+
+struct BlockedWebsite: Identifiable, Equatable, Codable {
+    let id: UUID
+    var domain: String
+    var displayName: String
+
+    init(id: UUID = UUID(), domain: String, displayName: String) {
+        self.id = id
+        self.domain = domain
+        self.displayName = displayName
     }
 }
 
@@ -312,20 +343,6 @@ private struct EmptyWebsitesPlaceholder: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
-}
-
-// MARK: - Models
-
-struct BlockedApp: Identifiable, Equatable {
-    let id = UUID()
-    var bundleIdentifier: String
-    var displayName: String
-}
-
-struct BlockedWebsite: Identifiable, Equatable {
-    let id = UUID()
-    var domain: String
-    var displayName: String
 }
 
 // MARK: - App Picker
@@ -477,4 +494,3 @@ private struct AppStoreSearchView: View {
 #Preview("Blocking - Premium") {
     BlockingView(subscription: .premium)
 }
-

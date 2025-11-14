@@ -4,4 +4,10 @@
    <FileRef
       location = "self:">
    </FileRef>
+   <FileRef
+      location = "group:BlockingModels.swift">
+   </FileRef>
+   <FileRef
+      location = "group:DEV_NOTES.md">
+   </FileRef>
 </Workspace>

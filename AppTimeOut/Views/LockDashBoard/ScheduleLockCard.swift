@@ -8,11 +8,11 @@
 //  - Day selection (Mon–Sun) with a concise, right-aligned "Weekly" toggle.
 //  - Multiple time slots (Premium). Free users can see the feature but can’t add more than one slot.
 //  - Validations: prevents overlapping slots and start >= end; disables Self-Lock when invalid.
-//  - Guardian lock integration: protects disabling or changes via an unlock sheet.
+//  - Partner lock integration: protects disabling or changes via an unlock sheet.
 //  - Dynamic header hint summarizing selected days and number of slots.
 //
 //  Dependencies / Interactions:
-//  - UnlockSheetView (presented to authorize Guardian-protected changes).
+//  - UnlockSheetView (presented to authorize Partner-protected changes).
 //  - Uses SwiftUI DatePicker for time slot editing.
 //
 //  Notes:
@@ -29,7 +29,7 @@ private struct TimeSlot: Identifiable, Equatable {
     var end: Date
 }
 
-private enum GuardianScheduleAction {
+private enum PartnerScheduleAction {
     case disableSelfLock
     case disableGuardian
 }
@@ -41,9 +41,9 @@ struct ScheduleLockCard: View {
     @State private var weeklyRepeat: Bool = true
 
     @State private var isSelfLockEnabled = false
-    @State private var isGuardianEnabled = false
+    @State private var isPartnerEnabled = false
 
-    @State private var pendingGuardianAction: GuardianScheduleAction? = nil
+    @State private var pendingPartnerAction: PartnerScheduleAction? = nil
     @State private var showUnlockSheet = false
     @State private var showDaySelectionAlert = false
 
@@ -159,17 +159,17 @@ struct ScheduleLockCard: View {
             }
             .disabled(hasInvalidRanges || hasOverlaps)
 
-            // Guardian lock toggle button
+            // Partner lock toggle button
             Button {
-                toggleGuardian()
+                togglePartner()
             } label: {
-                Text(isGuardianEnabled ? "⏸ Disable Guardian Lock" : "🛡 Enable Guardian Lock")
+                Text(isPartnerEnabled ? "⏸ Disable Partner Lock" : "🤝 Enable Partner Lock")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(isGuardianEnabled
+                    .background(isPartnerEnabled
                                 ? Color(red: 1.0, green: 0.647, blue: 0.0).opacity(0.2)
                                 : Color(red: 1.0, green: 0.647, blue: 0.0))
-                    .foregroundStyle(isGuardianEnabled ? Color(red: 1.0, green: 0.647, blue: 0.0) : .white)
+                    .foregroundStyle(isPartnerEnabled ? Color(red: 1.0, green: 0.647, blue: 0.0) : .white)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
             }
 
@@ -180,7 +180,7 @@ struct ScheduleLockCard: View {
         //.foregroundStyle(.primary) // Removed as per instructions
         .sheet(isPresented: $showUnlockSheet) {
             UnlockSheetView {
-                handleGuardianSuccess()
+                handlePartnerSuccess()
             }
         }
         .alert("Select a day", isPresented: $showDaySelectionAlert) {
@@ -283,8 +283,8 @@ struct ScheduleLockCard: View {
     private func toggleSelfLock() {
         if isSelfLockEnabled {
             // Turning OFF self-lock
-            if isGuardianEnabled {
-                pendingGuardianAction = .disableSelfLock
+            if isPartnerEnabled {
+                pendingPartnerAction = .disableSelfLock
                 showUnlockSheet = true
             } else {
                 isSelfLockEnabled = false
@@ -299,36 +299,36 @@ struct ScheduleLockCard: View {
         }
     }
 
-    private func toggleGuardian() {
-        if isGuardianEnabled {
-            // Turning OFF Guardian
+    private func togglePartner() {
+        if isPartnerEnabled {
+            // Turning OFF Partner
             if isSelfLockEnabled {
-                pendingGuardianAction = .disableGuardian
+                pendingPartnerAction = .disableGuardian
                 showUnlockSheet = true
             } else {
-                isGuardianEnabled = false
+                isPartnerEnabled = false
             }
         } else {
-            // Turning ON Guardian also ensures schedule is enabled
-            isGuardianEnabled = true
+            // Turning ON Partner also ensures schedule is enabled
+            isPartnerEnabled = true
             if !isSelfLockEnabled {
                 isSelfLockEnabled = true
             }
         }
     }
 
-    // MARK: - Guardian success
+    // MARK: - Partner success
 
-    private func handleGuardianSuccess() {
-        switch pendingGuardianAction {
+    private func handlePartnerSuccess() {
+        switch pendingPartnerAction {
         case .disableSelfLock:
             isSelfLockEnabled = false
         case .disableGuardian:
-            isGuardianEnabled = false
+            isPartnerEnabled = false
         case .none:
             break
         }
-        pendingGuardianAction = nil
+        pendingPartnerAction = nil
     }
 }
 

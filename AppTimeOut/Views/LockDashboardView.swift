@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(FirebaseAuth)
+import FirebaseAuth
+#endif
 
 struct LockDashboardView: View {
     @EnvironmentObject var subs: SubscriptionManager
@@ -34,6 +37,9 @@ struct LockDashboardView: View {
                     Menu {
                         NavigationLink(destination: BlockingView(subscription: currentLevel)) {
                             Label("Manage Blocks", systemImage: "globe")
+                        }
+                        NavigationLink(destination: ManagePartnersScreen()) {
+                            Label("Manage Partners", systemImage: "person.2.badge.key")
                         }
                         NavigationLink(destination: ProfileScreen()) {
                             Label("Profile", systemImage: "person.crop.circle")
