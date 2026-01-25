@@ -42,6 +42,58 @@
     ul {
       margin-left: 20px;
     }
+
+    .signup-form {
+      margin-top: 32px;
+      padding: 24px;
+      background: #f9f9f9;
+      border-radius: 12px;
+    }
+
+    .signup-form h2 {
+      margin-top: 0;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .form-row input[type="email"] {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .form-row button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .form-row button:hover {
+      background: #333;
+    }
+
+    .form-message {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .form-message.success {
+      color: #2e7d32;
+    }
+
+    .form-message.error {
+      color: #c62828;
+    }
   </style>
 </head>
 <body>
@@ -79,11 +131,53 @@
     All lock decisions and data stay entirely on the user’s device, and nothing is shared unless the user chooses to send an unlock code to a partner.
   </p>
 
+  <div class="signup-form">
+    <h2>Join the Beta</h2>
+    <p>Be the first to test AppTimeOut when it's ready. Sign up to get notified.</p>
+    <form id="signup-form">
+      <div class="form-row">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button type="submit">Join Us</button>
+      </div>
+    </form>
+    <div id="form-message" class="form-message"></div>
+  </div>
+
   <h2>Contact</h2>
   <p>
     <strong>Name:</strong> Harry Huynh<br>
     <strong>Email:</strong> <a href="mailto:huynh@apptimeout.com">huynh@apptimeout.com</a>
   </p>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('form-message');
+      const button = this.querySelector('button');
+
+      button.disabled = true;
+      button.textContent = 'Joining...';
+
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbzSNuLqdjFyY-FnODjzSfxvDrHFNYeLEEfgkLwyrlYXeTQ1Rx3G5sXtPJTyu9mcqaOh2A/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+        message.textContent = 'Thanks for joining! We\'ll notify you when the app is ready.';
+        message.className = 'form-message success';
+        document.getElementById('email').value = '';
+      } catch (error) {
+        message.textContent = 'Something went wrong. Please try again.';
+        message.className = 'form-message error';
+      }
+
+      button.disabled = false;
+      button.textContent = 'Join Us';
+    });
+  </script>
 
 </body>
 </html>
