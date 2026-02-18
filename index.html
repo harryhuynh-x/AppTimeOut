@@ -4,15 +4,65 @@
   <meta charset="utf-8">
   <title>AppTimeOut</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 40px auto;
-      max-width: 720px;
-      padding: 0 16px;
+      margin: 0;
+      padding: 0;
       line-height: 1.6;
       color: #111;
     }
 
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav button:hover {
+      color: #111;
+    }
+
+    nav button.active {
+      color: #111;
+      border-bottom-color: #111;
+    }
+
+    /* ── Pages ── */
+    .page {
+      display: none;
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 0 16px 60px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* ── Shared ── */
     .icon {
       text-align: center;
       margin-bottom: 8px;
@@ -43,6 +93,18 @@
       margin-left: 20px;
     }
 
+    .highlight-banner {
+      text-align: center;
+      background: #111;
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
+
+    /* ── Beta signup form ── */
     .signup-form {
       margin-top: 32px;
       padding: 24px;
@@ -95,70 +157,184 @@
       color: #c62828;
     }
 
-    .highlight-banner {
+    /* ── Support Us ── */
+    .support-intro {
       text-align: center;
-      background: #111;
-      color: #fff;
-      padding: 16px 24px;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 500;
       margin-bottom: 32px;
+    }
+
+    .support-intro p {
+      color: #555;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .payment-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #111;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .payment-card:hover {
+      background: #f9f9f9;
+      border-color: #bbb;
+    }
+
+    .payment-card .payment-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .payment-card .payment-info {
+      flex: 1;
+    }
+
+    .payment-card .payment-name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .payment-card .payment-desc {
+      font-size: 14px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .payment-card .payment-arrow {
+      font-size: 18px;
+      color: #aaa;
+    }
+
+    .support-note {
+      margin-top: 32px;
+      padding: 16px 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <div class="icon">
-    <img src="apptimeout-icon.png" alt="AppTimeOut app icon" width="160" height="160">
+  <nav>
+    <button class="active" onclick="showPage('product')">Product</button>
+    <button onclick="showPage('howto')">How To</button>
+    <button onclick="showPage('support')">Support Us</button>
+  </nav>
+
+  <!-- ── Product ── -->
+  <div id="page-product" class="page active">
+    <div class="icon">
+      <img src="apptimeout-icon.png" alt="AppTimeOut app icon" width="160" height="160">
+    </div>
+
+    <h1>AppTimeOut</h1>
+    <p class="tagline">Lock your most distracting apps. Unlock them with help from someone you trust.</p>
+
+    <div class="highlight-banner">Expected Release: March 2026</div>
+
+    <h2>Purpose</h2>
+    <p>
+      AppTimeOut helps users reduce digital distractions by blocking selected apps and websites, such as social media, messaging apps, and entertainment platforms.
+    </p>
+    <p>
+      The core idea is simple: when you decide to lock your distracting apps, you can choose to keep the lock fully self-controlled <strong>or</strong> add an accountability buddy who must provide an unlock code if you want to end the lock early.
+    </p>
+    <p>
+      This buddy-assisted unlock system encourages healthier habits, reduces impulsive app use, and supports long-term focus and wellbeing.
+    </p>
+
+    <h2>How It Works</h2>
+    <ul>
+      <li><strong>Choose what to block:</strong> Select the apps and websites you find most distracting.</li>
+      <li><strong>Schedule blocks:</strong> Customize recurring blocks for specific hours or days of the week.</li>
+      <li><strong>Self-lock option:</strong> Keep full control and unlock when the timer ends.</li>
+      <li><strong>Buddy-lock option:</strong> Require a trusted buddy to provide an unlock code if you want to end the lock early.</li>
+    </ul>
+
+    <h2>Privacy</h2>
+    <p>Your data stays on your device. AppTimeOut collects nothing; no personal info, no browsing history, no tracking.</p>
+
+    <h2>Contact</h2>
+    <p>
+      <strong>Name:</strong> Harry Huynh<br>
+      <strong>Email:</strong> <a href="mailto:harry@apptimeout.com">harry@apptimeout.com</a>
+    </p>
+
+    <div class="signup-form">
+      <h2>Join the Beta</h2>
+      <p>Be the first to test AppTimeOut when it's ready. Sign up to get notified.</p>
+      <form id="signup-form">
+        <div class="form-row">
+          <input type="email" id="email" placeholder="Enter your email" required>
+          <button type="submit">Join Us</button>
+        </div>
+      </form>
+      <div id="form-message" class="form-message"></div>
+    </div>
   </div>
 
-  <h1>AppTimeOut</h1>
-  <p class="tagline">Lock your most distracting apps. Unlock them with help from someone you trust.</p>
+  <!-- ── How To ── -->
+  <div id="page-howto" class="page">
+    <h1>How To</h1>
+    <p class="tagline">Step-by-step guides coming soon.</p>
+  </div>
 
-  <div class="highlight-banner">Expected Release: March 2026</div>
+  <!-- ── Support Us ── -->
+  <div id="page-support" class="page">
+    <h1>Support Us</h1>
+    <div class="support-intro">
+      <p>AppTimeOut is built by one person. If it's helped you reclaim your focus, any support is deeply appreciated — pay whatever feels right.</p>
+    </div>
 
-  <h2>Purpose</h2>
-  <p>
-    AppTimeOut helps users reduce digital distractions by blocking selected apps and websites, such as social media, messaging apps, and entertainment platforms.
-  </p>
-  <p>
-    The core idea is simple: when you decide to lock your distracting apps, you can choose to keep the lock fully self-controlled <strong>or</strong> add an accountability buddy who must provide an unlock code if you want to end the lock early.
-  </p>
-  <p>
-    This buddy-assisted unlock system encourages healthier habits, reduces impulsive app use, and supports long-term focus and wellbeing.
-  </p>
+    <div class="payment-options">
+      <a class="payment-card" href="#" target="_blank" rel="noopener">
+        <span class="payment-icon">💙</span>
+        <div class="payment-info">
+          <div class="payment-name">Venmo</div>
+          <div class="payment-desc">@your-venmo-handle</div>
+        </div>
+        <span class="payment-arrow">→</span>
+      </a>
 
-  <h2>How It Works</h2>
-  <ul>
-    <li><strong>Choose what to block:</strong> Select the apps and websites you find most distracting.</li>
-    <li><strong>Schedule blocks:</strong> Customize recurring blocks for specific hours or days of the week.</li>
-    <li><strong>Self-lock option:</strong> Keep full control and unlock when the timer ends.</li>
-    <li><strong>Buddy-lock option:</strong> Require a trusted buddy to provide an unlock code if you want to end the lock early.</li>
-  </ul>
+      <a class="payment-card" href="#" target="_blank" rel="noopener">
+        <span class="payment-icon">🅿️</span>
+        <div class="payment-info">
+          <div class="payment-name">PayPal</div>
+          <div class="payment-desc">paypal.me/your-link</div>
+        </div>
+        <span class="payment-arrow">→</span>
+      </a>
+    </div>
 
-  <h2>Privacy</h2>
-  <p>Your data stays on your device. AppTimeOut collects nothing; no personal info, no browsing history, no tracking.</p>
-
-  <h2>Contact</h2>
-  <p>
-    <strong>Name:</strong> Harry Huynh<br>
-    <strong>Email:</strong> <a href="mailto:harry@apptimeout.com">harry@apptimeout.com</a>
-  </p>
-
-  <div class="signup-form">
-    <h2>Join the Beta</h2>
-    <p>Be the first to test AppTimeOut when it's ready. Sign up to get notified.</p>
-    <form id="signup-form">
-      <div class="form-row">
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <button type="submit">Join Us</button>
-      </div>
-    </form>
-    <div id="form-message" class="form-message"></div>
+    <div class="support-note">
+      No account needed for Venmo or PayPal. Send any amount you'd like — even $1 means a lot.
+    </div>
   </div>
 
   <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
     document.getElementById('signup-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const email = document.getElementById('email').value;
