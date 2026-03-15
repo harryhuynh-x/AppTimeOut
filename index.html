@@ -4,9 +4,7 @@
   <meta charset="utf-8">
   <title>AppTimeOut</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -14,6 +12,7 @@
       padding: 0;
       line-height: 1.6;
       color: #111;
+      background: #f5f5f7;
     }
 
     /* ── Nav ── */
@@ -41,9 +40,7 @@
       transition: color 0.15s, border-color 0.15s;
     }
 
-    nav button:hover {
-      color: #111;
-    }
+    nav button:hover { color: #111; }
 
     nav button.active {
       color: #111;
@@ -58,40 +55,23 @@
       padding: 0 16px 60px;
     }
 
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
 
     /* ── Shared ── */
-    .icon {
-      text-align: center;
-      margin-bottom: 8px;
-    }
+    .icon { text-align: center; margin-bottom: 8px; }
+    .icon img { border-radius: 32px; }
 
-    .icon img {
-      border-radius: 32px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 8px;
-      margin-bottom: 4px;
-    }
+    h1 { text-align: center; margin-top: 8px; margin-bottom: 4px; }
 
     .tagline {
       text-align: center;
       font-style: italic;
       margin-bottom: 32px;
+      color: #555;
     }
 
-    h2 {
-      margin-top: 32px;
-      margin-bottom: 8px;
-    }
-
-    ul {
-      margin-left: 20px;
-    }
+    h2 { margin-top: 32px; margin-bottom: 8px; }
+    ul { margin-left: 20px; }
 
     .highlight-banner {
       text-align: center;
@@ -112,9 +92,7 @@
       border-radius: 12px;
     }
 
-    .signup-form h2 {
-      margin-top: 0;
-    }
+    .signup-form h2 { margin-top: 0; }
 
     .form-row {
       display: flex;
@@ -140,34 +118,251 @@
       cursor: pointer;
     }
 
-    .form-row button:hover {
-      background: #333;
+    .form-row button:hover { background: #333; }
+
+    .form-message { margin-top: 12px; font-size: 14px; }
+    .form-message.success { color: #2e7d32; }
+    .form-message.error   { color: #c62828; }
+
+    /* ── Screen grid ── */
+    .screen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 8px;
     }
 
-    .form-message {
-      margin-top: 12px;
-      font-size: 14px;
+    .screen-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 18px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
     }
 
-    .form-message.success {
-      color: #2e7d32;
+    .screen-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
-    .form-message.error {
-      color: #c62828;
+    .screen-card strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
     }
 
+    .screen-card p {
+      font-size: 0.85rem;
+      color: #444;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 520px) {
+      .screen-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── How To ── */
+    .step-block {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .step-block h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .step-block p, .step-block li {
+      font-size: 0.95rem;
+      color: #333;
+      margin: 4px 0;
+    }
+
+    .step-block ul { margin: 8px 0 0 18px; }
+
+    .step-num {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 99px;
+      padding: 2px 9px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .tip {
+      background: #fffbe6;
+      border-left: 3px solid #f0a500;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    /* ── Pricing ── */
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .pricing-header h1 { margin-bottom: 6px; }
+
+    .plans {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 260px;
+      max-width: 340px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    .card.pro {
+      background: linear-gradient(145deg, #1c1c1e, #2c2c2e);
+      color: #f5f5f7;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    }
+
+    .badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FF9500;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6e6e73;
+      margin-bottom: 4px;
+    }
+
+    .card.pro .plan-name { color: #98989d; }
+
+    .price {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .price sup { font-size: 1.1rem; font-weight: 600; vertical-align: super; }
+
+    .price-sub {
+      font-size: 0.82rem;
+      color: #6e6e73;
+      margin-bottom: 22px;
+    }
+
+    .card.pro .price-sub { color: #98989d; }
+
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border-radius: 11px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      margin-bottom: 22px;
+      transition: opacity 0.15s;
+      cursor: pointer;
+    }
+
+    .cta:hover { opacity: 0.85; }
+    .card.free .cta { background: #f0f0f0; color: #111; border: 1.5px solid #d1d1d6; }
+    .card.pro  .cta { background: #FF9500; color: #fff; }
+
+    .features { list-style: none; padding: 0; margin: 0; }
+
+    .features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 8px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .card.pro .features li { border-bottom-color: #3a3a3c; }
+    .features li:last-child { border-bottom: none; }
+
+    .fi { font-size: 0.95rem; flex-shrink: 0; margin-top: 1px; }
+    .fi.check { color: #34C759; }
+    .fi.cross { color: #FF3B30; }
+    .fi.star  { color: #FF9500; }
+
+    .feat-label { font-weight: 500; }
+
+    .feat-note {
+      display: block;
+      font-size: 0.78rem;
+      color: #6e6e73;
+      margin-top: 1px;
+    }
+
+    .card.pro .feat-note { color: #98989d; }
+
+    .pricing-footnote {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #6e6e73;
+    }
+
+    .pricing-footnote a { color: #007AFF; text-decoration: none; }
+
+    @media (max-width: 580px) {
+      .plans { flex-direction: column; align-items: center; }
+      .card  { max-width: 100%; }
+    }
   </style>
 </head>
 <body>
 
   <nav>
-    <button class="active" onclick="showPage('product')">Product</button>
-    <button onclick="showPage('howto')">How To</button>
-    <button onclick="showPage('support')">Support Us</button>
+    <button class="active" onclick="showPage('product', this)">Product</button>
+    <button onclick="showPage('howto', this)">How To</button>
+    <button onclick="showPage('pricing', this)">Pricing</button>
+    <button onclick="showPage('support', this)">Contact Us</button>
   </nav>
 
-  <!-- ── Product ── -->
+  <!-- ══════════════════════════════════════════
+       PRODUCT
+  ══════════════════════════════════════════ -->
   <div id="page-product" class="page active">
     <div class="icon">
       <img src="apptimeout-icon.png" alt="AppTimeOut app icon" width="160" height="160">
@@ -180,10 +375,10 @@
 
     <h2>Purpose</h2>
     <p>
-      AppTimeOut helps users reduce digital distractions by blocking selected apps and websites, such as social media, messaging apps, and entertainment platforms.
+      AppTimeOut helps you reduce digital distractions by blocking selected apps and websites — social media, messaging apps, entertainment platforms, and more.
     </p>
     <p>
-      The core idea is simple: when you decide to lock your distracting apps, you can choose to keep the lock fully self-controlled <strong>or</strong> add an accountability buddy who must provide an unlock code if you want to end the lock early.
+      The core idea is simple: when you decide to lock your distracting apps, you can keep the lock fully self-controlled <strong>or</strong> add an accountability buddy who must provide an unlock code if you want to end the lock early.
     </p>
     <p>
       This buddy-assisted unlock system encourages healthier habits, reduces impulsive app use, and supports long-term focus and wellbeing.
@@ -192,13 +387,13 @@
     <h2>How It Works</h2>
     <ul>
       <li><strong>Choose what to block:</strong> Select the apps and websites you find most distracting.</li>
-      <li><strong>Schedule blocks:</strong> Customize recurring blocks for specific hours or days of the week.</li>
-      <li><strong>Self-lock option:</strong> Keep full control and unlock when the timer ends.</li>
-      <li><strong>Buddy-lock option:</strong> Require a trusted buddy to provide an unlock code if you want to end the lock early.</li>
+      <li><strong>Set a timer or schedule:</strong> Lock for a quick duration or set recurring daily blocks.</li>
+      <li><strong>Self-lock option:</strong> Keep full control — lock clears automatically when time is up.</li>
+      <li><strong>Buddy Lock option:</strong> Require a trusted buddy's code to end the lock early.</li>
     </ul>
 
     <h2>Privacy</h2>
-    <p>Your data stays on your device. AppTimeOut collects nothing; no personal info, no browsing history, no tracking.</p>
+    <p>Your data stays on your device. AppTimeOut collects nothing — no personal info, no browsing history, no tracking.</p>
 
     <h2>Contact</h2>
     <p>
@@ -219,24 +414,223 @@
     </div>
   </div>
 
-  <!-- ── How To ── -->
+  <!-- ══════════════════════════════════════════
+       HOW TO
+  ══════════════════════════════════════════ -->
   <div id="page-howto" class="page">
-    <h1>How To</h1>
-    <p class="tagline">Step-by-step guides coming soon.</p>
+    <h1>How To Use AppTimeOut</h1>
+    <p class="tagline">Simple by design. Powerful by habit.</p>
+
+    <!-- SCREENS OVERVIEW -->
+    <h2 style="margin-bottom:12px">4 Main Screens</h2>
+    <div class="screen-grid">
+
+      <div class="screen-card">
+        <div class="screen-icon">🏠</div>
+        <div>
+          <strong>Dashboard</strong>
+          <p>Start and stop locks. Access Timer Lock, Schedule Lock, and Buddy Lock.</p>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-icon">🚫</div>
+        <div>
+          <strong>Manage Blocks</strong>
+          <p>Add apps and websites to block. Grant settings to block app/website here.</p>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-icon">👥</div>
+        <div>
+          <strong>Manage Buddies <span style="font-weight:400;color:#FF9500;font-size:0.82rem">(Pro only)</span></strong>
+          <p>Add up to 3 buddies by email. Each can receive a 4-digit code to help you unlock your app/website.</p>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-icon">👤</div>
+        <div>
+          <strong>Profile</strong>
+          <p>View your plan, upgrade to Pro, or sign out.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="margin-top:32px;margin-bottom:12px">Step-by-Step</h2>
+
+    <!-- STEP 1 -->
+    <div class="step-block">
+      <h3><span class="step-num">1</span> Choose What to Block</h3>
+      <ul>
+        <li>Tap the <strong>⋯ menu</strong> (top-right) → <strong>Manage Blocks</strong>.</li>
+        <li>Tap <strong>Allow Screen Time Access</strong> if prompted — this is required for blocking to work.</li>
+        <li>Under <strong>Apps</strong>, tap <strong>Add App</strong> and pick from the iOS picker.</li>
+        <li>Under <strong>Websites</strong>, tap <strong>Add Website</strong> or <strong>Add Manually</strong> to type a domain (e.g. <code>instagram.com</code>).</li>
+        <li>For website blocking to work in Safari, tap <strong>Enable Safari Extension</strong> → turn on <strong>AppTimeOut Blocker</strong> in the iOS Settings that open.</li>
+        <li>Swipe left on any item to <strong>Rename</strong> or <strong>Delete</strong> it.</li>
+      </ul>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-block">
+      <h3><span class="step-num">2</span> Timer Lock <span style="font-size:0.8rem;font-weight:400;color:#555">(Free &amp; Pro)</span></h3>
+      <ul>
+        <li>Use <strong>+</strong> / <strong>−</strong> to set a duration, then tap <strong>Start Lock</strong>.</li>
+        <li>Blocked apps and websites are immediately restricted.</li>
+        <li>The lock lifts automatically when the timer expires.</li>
+      </ul>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-block">
+      <h3><span class="step-num">3</span> Schedule Lock <span style="font-size:0.8rem;font-weight:400;color:#555">(Free &amp; Pro)</span></h3>
+      <ul>
+        <li>Tap the day circles to pick which days to block.</li>
+        <li>Tap <strong>Add Slot</strong> and set a start and end time.</li>
+        <li>Toggle <strong>Weekly</strong> on to repeat every week automatically.</li>
+        <li>Enable <strong>Self-Lock</strong> to activate the schedule.</li>
+      </ul>
+      <div class="tip">💡 <strong>Free:</strong> Up to 5 days/week · 4 slots &nbsp;|&nbsp; <strong>Pro:</strong> All 7 days · unlimited slots</div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-block">
+      <h3><span class="step-num">4</span> Buddy Lock <span style="font-size:0.8rem;font-weight:400;color:#FF9500">Pro only</span></h3>
+      <ul>
+        <li>Go to <strong>⋯ menu</strong> → <strong>Manage Buddies</strong> → <strong>Add Buddy</strong>.</li>
+        <li>Enter your buddy's email — they'll receive a <strong>4-digit unlock code</strong>.</li>
+        <li>On the Schedule card, enable the <strong>Buddy Lock</strong> toggle.</li>
+        <li>To unlock early, tap <strong>Unlock with Buddy Code</strong> and ask your buddy for their code.</li>
+      </ul>
+    </div>
+
+    <!-- FAQ -->
+    <div class="step-block">
+      <h3>Common Questions</h3>
+      <p><strong>Why aren't my apps being blocked?</strong><br>
+      Make sure you've added apps to the block list before starting a lock, and Screen Time permission was granted on first launch.</p>
+
+      <p style="margin-top:10px"><strong>Does blocking work if I close the app?</strong><br>
+      Yes — blocking runs through iOS's Screen Time system, independently of the app.</p>
+
+      <p style="margin-top:10px"><strong>Can I unlock early without a buddy?</strong><br>
+      Yes, for Timer Lock and Schedule Lock. With Buddy Lock enabled, you need your buddy's code to unlock early.</p>
+    </div>
   </div>
 
-  <!-- ── Support Us ── -->
+  <!-- ══════════════════════════════════════════
+       PRICING
+  ══════════════════════════════════════════ -->
+  <div id="page-pricing" class="page">
+    <div class="pricing-header">
+      <h1>Simple, honest pricing</h1>
+      <p class="tagline">Start free. Upgrade when you need more accountability.</p>
+    </div>
+
+    <div class="plans">
+
+      <!-- Free -->
+      <div class="card free">
+        <p class="plan-name">Free</p>
+        <div class="price">$0</div>
+        <p class="price-sub">Forever free</p>
+        <a class="cta" href="#">Download Free</a>
+        <ul class="features">
+          <li><span class="fi check">✓</span>
+            <span><span class="feat-label">Timer Lock</span>
+            <span class="feat-note">Quick duration-based blocking</span></span>
+          </li>
+          <li><span class="fi check">✓</span>
+            <span><span class="feat-label">Schedule Lock</span>
+            <span class="feat-note">Up to 5 days/week · 4 time slots</span></span>
+          </li>
+          <li><span class="fi check">✓</span>
+            <span><span class="feat-label">Block Apps</span>
+            <span class="feat-note">Up to 3 apps</span></span>
+          </li>
+          <li><span class="fi check">✓</span>
+            <span><span class="feat-label">Block Websites</span>
+            <span class="feat-note">Up to 3 websites</span></span>
+          </li>
+          <li><span class="fi cross">✕</span>
+            <span><span class="feat-label">Buddy Lock</span>
+            <span class="feat-note">Requires Pro</span></span>
+          </li>
+          <li><span class="fi cross">✕</span>
+            <span><span class="feat-label">Accountability Buddies</span>
+            <span class="feat-note">Requires Pro</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Pro -->
+      <div class="card pro">
+        <span class="badge">Most Popular</span>
+        <p class="plan-name">Pro</p>
+        <div class="price"><sup>$</sup>0.99<span style="font-size:1.1rem;font-weight:500">/mo</span></div>
+        <p class="price-sub">or $9.99/year — save 16%</p>
+        <a class="cta" href="#">Upgrade to Pro</a>
+        <ul class="features">
+          <li><span class="fi star">★</span>
+            <span><span class="feat-label">Timer Lock</span>
+            <span class="feat-note">Quick duration-based blocking</span></span>
+          </li>
+          <li><span class="fi star">★</span>
+            <span><span class="feat-label">Schedule Lock — Unlimited</span>
+            <span class="feat-note">All 7 days · unlimited time slots</span></span>
+          </li>
+          <li><span class="fi star">★</span>
+            <span><span class="feat-label">Block Apps — Unlimited</span>
+            <span class="feat-note">No cap on blocked apps</span></span>
+          </li>
+          <li><span class="fi star">★</span>
+            <span><span class="feat-label">Block Websites — Unlimited</span>
+            <span class="feat-note">No cap on blocked websites</span></span>
+          </li>
+          <li><span class="fi star">★</span>
+            <span><span class="feat-label">Buddy Lock</span>
+            <span class="feat-note">Unlock with the code from your buddy</span></span>
+          </li>
+          <li><span class="fi star">★</span>
+            <span><span class="feat-label">Up to 3 Accountability Buddies</span>
+            <span class="feat-note">Invite friends or family to help you stay on track</span></span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="pricing-footnote">
+      Subscriptions are managed through the App Store. Cancel anytime in <strong>iOS Settings → Apple ID → Subscriptions</strong>.<br>
+      Questions? <a href="mailto:harry@apptimeout.com">harry@apptimeout.com</a>
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SUPPORT US
+  ══════════════════════════════════════════ -->
   <div id="page-support" class="page">
-    <h1>Support Us</h1>
-    <p class="tagline">Coming soon.</p>
+    <h1>Contact Us</h1>
+    <p class="tagline">We'd love to hear from you.</p>
+
+    <div class="step-block">
+      <h3>📬 Get in Touch</h3>
+      <p>Have a question, found a bug, or want to share feedback? Send us an email and we'll get back to you as soon as possible.</p>
+      <p style="margin-top:14px;font-size:1rem;">
+        <strong>Email:</strong> <a href="mailto:harry@apptimeout.com" style="color:#007AFF;text-decoration:none;">harry@apptimeout.com</a>
+      </p>
+    </div>
   </div>
 
   <script>
-    function showPage(name) {
+    function showPage(name, btn) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
-      event.currentTarget.classList.add('active');
+      btn.classList.add('active');
     }
 
     document.getElementById('signup-form').addEventListener('submit', async function(e) {
