@@ -6,13 +6,18 @@
   <style>
     * { box-sizing: border-box; }
 
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
-      color: #111;
-      background: #f5f5f7;
+      color: #1c1c1e;
+      background: #fff8f0;
     }
 
     /* ── Nav ── */
@@ -21,7 +26,8 @@
       top: 0;
       z-index: 100;
       background: #fff;
-      border-bottom: 1px solid #e5e5e5;
+      border-bottom: 1px solid #ffe5c0;
+      box-shadow: 0 2px 12px rgba(255,149,0,0.10);
       display: flex;
       justify-content: center;
       gap: 8px;
@@ -34,17 +40,18 @@
       padding: 16px 20px;
       font-size: 15px;
       font-weight: 500;
-      color: #555;
+      color: #888;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: color 0.15s, border-color 0.15s;
     }
 
-    nav button:hover { color: #111; }
+    nav button:hover { color: #FF9500; }
 
     nav button.active {
-      color: #111;
-      border-bottom-color: #111;
+      color: #FF9500;
+      border-bottom-color: #FF9500;
+      font-weight: 600;
     }
 
     /* ── Pages ── */
@@ -57,6 +64,37 @@
 
     .page.active { display: block; }
 
+    /* ── Hero (product page header) ── */
+    .hero {
+      background: linear-gradient(160deg, #fff3dc 0%, #ffe0a0 60%, #ffcb6b 100%);
+      border-radius: 28px;
+      padding: 40px 24px 32px;
+      margin-bottom: 32px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(255,149,0,0.18);
+    }
+
+    .hero .icon { margin-bottom: 12px; }
+    .hero .icon img {
+      border-radius: 36px;
+      animation: float 3.5s ease-in-out infinite;
+      box-shadow: 0 8px 28px rgba(255,130,0,0.30);
+    }
+
+    .hero h1 {
+      margin-top: 10px;
+      margin-bottom: 6px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #7a3800;
+    }
+
+    .hero .tagline {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: #a05820;
+    }
+
     /* ── Shared ── */
     .icon { text-align: center; margin-bottom: 8px; }
     .icon img { border-radius: 32px; }
@@ -67,32 +105,47 @@
       text-align: center;
       font-style: italic;
       margin-bottom: 32px;
-      color: #555;
+      color: #888;
     }
 
-    h2 { margin-top: 32px; margin-bottom: 8px; }
+    h2 {
+      margin-top: 32px;
+      margin-bottom: 8px;
+      color: #1c1c1e;
+      padding-left: 12px;
+      border-left: 3px solid #FF9500;
+    }
+
     ul { margin-left: 20px; }
 
     .highlight-banner {
       text-align: center;
-      background: #111;
+      background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
       color: #fff;
       padding: 16px 24px;
       border-radius: 12px;
       font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 32px;
+      font-weight: 600;
+      margin-bottom: 0;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 16px rgba(255,107,0,0.30);
     }
 
     /* ── Beta signup form ── */
     .signup-form {
       margin-top: 32px;
       padding: 24px;
-      background: #f9f9f9;
-      border-radius: 12px;
+      background: linear-gradient(135deg, #fff8ee, #fff0d6);
+      border-radius: 16px;
+      border: 1.5px solid #ffd085;
     }
 
-    .signup-form h2 { margin-top: 0; }
+    .signup-form h2 {
+      margin-top: 0;
+      border-left: none;
+      padding-left: 0;
+      color: #7a3800;
+    }
 
     .form-row {
       display: flex;
@@ -104,21 +157,29 @@
       flex: 1;
       padding: 12px 16px;
       font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      border: 1.5px solid #ffc06a;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.15s;
     }
+
+    .form-row input[type="email"]:focus { border-color: #FF9500; }
 
     .form-row button {
       padding: 12px 24px;
       font-size: 16px;
-      background: #111;
+      background: linear-gradient(135deg, #FF9500, #FF6B00);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: 600;
+      transition: opacity 0.15s, transform 0.1s;
+      box-shadow: 0 3px 10px rgba(255,107,0,0.30);
     }
 
-    .form-row button:hover { background: #333; }
+    .form-row button:hover { opacity: 0.9; transform: translateY(-1px); }
 
     .form-message { margin-top: 12px; font-size: 14px; }
     .form-message.success { color: #2e7d32; }
@@ -136,10 +197,17 @@
       background: #fff;
       border-radius: 14px;
       padding: 18px 18px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 10px rgba(255,149,0,0.10);
+      border: 1px solid #ffe8c0;
       display: flex;
       gap: 14px;
       align-items: flex-start;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .screen-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255,149,0,0.16);
     }
 
     .screen-icon {
@@ -156,7 +224,7 @@
 
     .screen-card p {
       font-size: 0.85rem;
-      color: #444;
+      color: #555;
       margin: 0;
       line-height: 1.5;
     }
@@ -171,8 +239,13 @@
       border-radius: 14px;
       padding: 22px 24px;
       margin-bottom: 16px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 10px rgba(255,149,0,0.09);
+      border: 1px solid #ffe8c0;
+      border-left: 4px solid #FF9500;
+      transition: transform 0.15s;
     }
+
+    .step-block:hover { transform: translateX(2px); }
 
     .step-block h3 {
       margin: 0 0 8px;
@@ -189,7 +262,7 @@
 
     .step-num {
       display: inline-block;
-      background: #111;
+      background: linear-gradient(135deg, #FF9500, #FF6B00);
       color: #fff;
       font-size: 0.75rem;
       font-weight: 700;
@@ -197,16 +270,17 @@
       padding: 2px 9px;
       margin-right: 8px;
       vertical-align: middle;
+      box-shadow: 0 2px 6px rgba(255,107,0,0.35);
     }
 
     .tip {
-      background: #fffbe6;
-      border-left: 3px solid #f0a500;
+      background: #fff8e6;
+      border-left: 3px solid #FF9500;
       padding: 10px 14px;
       border-radius: 6px;
       font-size: 0.88rem;
       margin-top: 10px;
-      color: #555;
+      color: #7a4800;
     }
 
     /* ── Pricing ── */
@@ -215,7 +289,7 @@
       margin-bottom: 32px;
     }
 
-    .pricing-header h1 { margin-bottom: 6px; }
+    .pricing-header h1 { margin-bottom: 6px; border-left: none; padding-left: 0; }
 
     .plans {
       display: flex;
@@ -232,22 +306,29 @@
       background: #fff;
       border-radius: 20px;
       padding: 28px 24px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 16px rgba(255,149,0,0.10);
+      border: 1.5px solid #ffe0a0;
       position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
+
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(255,149,0,0.18); }
 
     .card.pro {
       background: linear-gradient(145deg, #1c1c1e, #2c2c2e);
       color: #f5f5f7;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      border-color: transparent;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 0 0 1px rgba(255,149,0,0.25);
     }
+
+    .card.pro:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.28), 0 0 0 2px rgba(255,149,0,0.50); }
 
     .badge {
       position: absolute;
       top: -13px;
       left: 50%;
       transform: translateX(-50%);
-      background: #FF9500;
+      background: linear-gradient(135deg, #FF9500, #FF6B00);
       color: #fff;
       font-size: 0.7rem;
       font-weight: 700;
@@ -256,6 +337,7 @@
       padding: 4px 14px;
       border-radius: 99px;
       white-space: nowrap;
+      box-shadow: 0 3px 10px rgba(255,107,0,0.40);
     }
 
     .plan-name {
@@ -298,13 +380,13 @@
       text-decoration: none;
       border: none;
       margin-bottom: 22px;
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, transform 0.1s;
       cursor: pointer;
     }
 
-    .cta:hover { opacity: 0.85; }
+    .cta:hover { opacity: 0.88; transform: translateY(-1px); }
     .card.free .cta { background: #f0f0f0; color: #111; border: 1.5px solid #d1d1d6; }
-    .card.pro  .cta { background: #FF9500; color: #fff; }
+    .card.pro  .cta { background: linear-gradient(135deg, #FF9500, #FF6B00); color: #fff; box-shadow: 0 4px 14px rgba(255,107,0,0.35); }
 
     .features { list-style: none; padding: 0; margin: 0; }
 
@@ -314,7 +396,7 @@
       gap: 9px;
       padding: 8px 0;
       font-size: 0.92rem;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f5e8d0;
     }
 
     .card.pro .features li { border-bottom-color: #3a3a3c; }
@@ -343,7 +425,7 @@
       color: #6e6e73;
     }
 
-    .pricing-footnote a { color: #007AFF; text-decoration: none; }
+    .pricing-footnote a { color: #FF9500; text-decoration: none; }
 
     @media (max-width: 580px) {
       .plans { flex-direction: column; align-items: center; }
@@ -355,7 +437,8 @@
       background: #fff;
       border-radius: 16px;
       padding: 28px 28px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 12px rgba(255,149,0,0.10);
+      border: 1.5px solid #ffe0a0;
       margin-top: 8px;
     }
 
@@ -375,7 +458,7 @@
     .cf-field label {
       font-size: 0.82rem;
       font-weight: 600;
-      color: #444;
+      color: #7a3800;
     }
 
     .cf-field input,
@@ -384,12 +467,12 @@
       padding: 11px 14px;
       font-size: 0.93rem;
       font-family: inherit;
-      border: 1.5px solid #e0e0e0;
+      border: 1.5px solid #e8d5b0;
       border-radius: 10px;
-      background: #f9f9f9;
-      color: #111;
+      background: #fffaf3;
+      color: #1c1c1e;
       outline: none;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s;
       appearance: none;
       -webkit-appearance: none;
     }
@@ -397,14 +480,16 @@
     .cf-field input:focus,
     .cf-field select:focus,
     .cf-field textarea:focus {
-      border-color: #007AFF;
+      border-color: #FF9500;
       background: #fff;
+      box-shadow: 0 0 0 3px rgba(255,149,0,0.12);
     }
 
     .cf-field select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23888' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23FF9500' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
+      background-color: #fffaf3;
       padding-right: 36px;
     }
 
@@ -422,7 +507,7 @@
     }
 
     .cf-submit {
-      background: #007AFF;
+      background: linear-gradient(135deg, #FF9500, #FF6B00);
       color: #fff;
       border: none;
       border-radius: 12px;
@@ -430,12 +515,13 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, transform 0.1s;
       font-family: inherit;
+      box-shadow: 0 4px 14px rgba(255,107,0,0.35);
     }
 
-    .cf-submit:hover { opacity: 0.85; }
-    .cf-submit:disabled { opacity: 0.55; cursor: default; }
+    .cf-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    .cf-submit:disabled { opacity: 0.55; cursor: default; transform: none; }
 
     .cf-note {
       text-align: center;
@@ -443,6 +529,8 @@
       font-size: 0.8rem;
       color: #888;
     }
+
+    .cf-note a { color: #FF9500 !important; }
 
     @media (max-width: 520px) {
       .cf-row { grid-template-columns: 1fr; }
@@ -463,14 +551,14 @@
        PRODUCT
   ══════════════════════════════════════════ -->
   <div id="page-product" class="page active">
-    <div class="icon">
-      <img src="apptimeout-icon.png" alt="AppTimeOut app icon" width="160" height="160">
+    <div class="hero">
+      <div class="icon">
+        <img src="apptimeout-icon.png" alt="AppTimeOut app icon" width="140" height="140">
+      </div>
+      <h1>AppTimeOut</h1>
+      <p class="tagline">Lock your most distracting apps. Unlock them with help from someone you trust.</p>
+      <div class="highlight-banner">Expected Release: March 2026</div>
     </div>
-
-    <h1>AppTimeOut</h1>
-    <p class="tagline">Lock your most distracting apps. Unlock them with help from someone you trust.</p>
-
-    <div class="highlight-banner">Expected Release: March 2026</div>
 
     <h2>Purpose</h2>
     <p>
