@@ -470,98 +470,302 @@
     <button onclick="showPage('support', this)">Contact Us</button>
   </nav>
 
+  <style>
+    /* ── Home page overrides ── */
+    #page-product {
+      max-width: 100%;
+      margin: 0;
+      padding: 0 0 60px;
+    }
+
+    .home-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 64px 24px 48px;
+      background: var(--brand-bg);
+    }
+
+    .hero .app-icon { margin-bottom: 16px; }
+    .hero .app-icon img { border-radius: 24px; }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 12px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #FF9500, #FF3B30);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+
+    /* Benefits strip */
+    .benefits {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 40px 24px;
+      background: #fff;
+      border-top: 1px solid #f0e8d8;
+      border-bottom: 1px solid #f0e8d8;
+    }
+
+    .benefit-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: #444;
+      font-weight: 500;
+    }
+
+    .benefit-item .bi { font-size: 2rem; }
+
+    /* Feature rows */
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      padding: 64px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .feature-row.reverse { flex-direction: row-reverse; }
+
+    .feature-row.alt-bg {
+      max-width: 100%;
+      background: #f7f3ec;
+      padding: 64px 0;
+    }
+
+    .feature-row.alt-bg .feature-row-inner {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .feature-phone {
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .feature-phone img {
+      width: 220px;
+      border-radius: 36px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.15), 0 4px 16px rgba(255,149,0,0.12);
+    }
+
+    .feature-text { flex: 1; min-width: 0; }
+
+    .feature-text h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin: 0 0 12px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .feature-text h2 span {
+      background: linear-gradient(90deg, #FF9500, #FF3B30);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .feature-text p { color: #444; font-size: 1rem; line-height: 1.7; margin: 0 0 20px; }
+
+    .feature-text ul { padding-left: 20px; color: #444; }
+    .feature-text ul li { margin-bottom: 8px; font-size: 0.95rem; }
+
+    /* Use cases */
+    .use-cases-section {
+      padding: 64px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .use-cases-section h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .use-cases-section .sub {
+      text-align: center;
+      color: #666;
+      margin-bottom: 36px;
+      font-size: 1rem;
+    }
+
+    .use-case-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .uc-card {
+      flex: 1;
+      min-width: 240px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 2px 16px rgba(255,149,0,0.10);
+    }
+
+    .uc-card img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--brand-tint);
+      margin-bottom: 12px;
+    }
+
+    .uc-card strong { display: block; margin-bottom: 6px; font-size: 0.95rem; }
+    .uc-card p { margin: 0; font-size: 0.875rem; color: #555; line-height: 1.6; }
+
+    /* Privacy banner */
+    .privacy-banner {
+      background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+      color: #f5f5f7;
+      padding: 56px 24px;
+      text-align: center;
+    }
+
+    .privacy-banner h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 10px; }
+    .privacy-banner p  { color: #aaa; max-width: 480px; margin: 0 auto; font-size: 0.95rem; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .feature-row, .feature-row.alt-bg .feature-row-inner { flex-direction: column; gap: 32px; }
+      .feature-row.reverse { flex-direction: column; }
+      .use-case-cards { flex-direction: column; }
+      .benefits { gap: 24px; }
+    }
+  </style>
+
   <!-- ══════════════════════════════════════════
-       PRODUCT
+       HOME
   ══════════════════════════════════════════ -->
   <div id="page-product" class="page active">
-    <div class="icon">
-      <img src="apptimeout-icon.png" alt="AppTimeOut app icon" width="160" height="160">
-    </div>
 
-    <h1>AppTimeOut</h1>
-    <p class="tagline" style="font-size:1.3rem;font-weight:600;font-style:normal;background:linear-gradient(90deg,#FF9500,#FF3B30);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Reclaim your day, reclaim your attention!</p>
-
-    <!-- App Store Download -->
-    <div style="text-align:center;margin-bottom:32px;">
+    <!-- ① HERO -->
+    <div class="hero">
+      <div class="app-icon">
+        <img src="apptimeout-icon.png" alt="AppTimeOut" width="80" height="80">
+      </div>
+      <h1>Reclaim your day,<br><span>reclaim your attention.</span></h1>
+      <p>Block distracting apps and websites with locks that actually hold — even against yourself.</p>
       <a href="https://apps.apple.com/app/apptimeout/id6743812048" target="_blank">
         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-             alt="Download on the App Store" height="54">
+             alt="Download on the App Store" height="50">
       </a>
     </div>
 
-    <!-- Two-column layout: screenshot left, content right -->
-    <div style="display:flex;gap:40px;align-items:flex-start;margin-top:16px;">
+    <!-- ② BENEFITS STRIP -->
+    <div class="benefits">
+      <div class="benefit-item"><span class="bi">🎯</span>Better focus</div>
+      <div class="benefit-item"><span class="bi">🧠</span>Mental clarity</div>
+      <div class="benefit-item"><span class="bi">😴</span>Improved sleep</div>
+      <div class="benefit-item"><span class="bi">💪</span>Stronger habits</div>
+    </div>
 
-      <!-- Left: sticky phone screenshot -->
-      <div style="flex-shrink:0;position:sticky;top:80px;text-align:center;">
-        <img src="Photos/Dashboard.png"
-             alt="AppTimeOut Dashboard"
-             style="width:220px;border-radius:36px;box-shadow:0 24px 64px rgba(0,0,0,0.18),0 4px 16px rgba(255,149,0,0.12);">
+    <!-- ③ FEATURE: Timer & Schedule Lock -->
+    <div class="feature-row">
+      <div class="feature-phone">
+        <img src="Photos/Dashboard.png" alt="AppTimeOut Dashboard">
       </div>
-
-      <!-- Right: all text content -->
-      <div style="flex:1;min-width:0;">
-
-        <h2>Purpose</h2>
+      <div class="feature-text">
+        <h2>Locks that <span>actually hold.</span></h2>
         <p>
-          AppTimeOut blocks distracting apps and websites with locks that actually hold — even against yourself. Add an accountability buddy, and only their code can set you free.
+          Set a Timer Lock for a quick focus session or configure a recurring Schedule Lock for your mornings, work hours, or bedtime. Once active, the lock holds — even if you change your mind.
         </p>
+        <ul>
+          <li>⏱ <strong>Timer Lock</strong> — block for any duration, clears automatically</li>
+          <li>📅 <strong>Schedule Lock</strong> — recurring daily blocks on your schedule</li>
+          <li>🔒 <strong>Self-Lock</strong> — you set it, iOS enforces it</li>
+        </ul>
+      </div>
+    </div>
 
-        <h2>Use Cases</h2>
-        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:8px;">
+    <!-- ④ FEATURE: Buddy Lock (alt background) -->
+    <div class="feature-row alt-bg">
+      <div class="feature-row-inner">
+        <div class="feature-text">
+          <h2>Blocking that <span>cannot be bypassed.</span></h2>
+          <p>
+            Struggling with "just 5 more minutes"? Enable Buddy Lock and assign a trusted friend or family member. Only their 4-digit code can end the lock early — willpower is no longer the only thing standing between you and your phone.
+          </p>
+          <ul>
+            <li>🤝 Add up to 3 accountability buddies</li>
+            <li>📧 Unlock code delivered to your buddy via email</li>
+            <li>⏰ Codes expire after 24 hours for security</li>
+          </ul>
+        </div>
+        <div class="feature-phone">
+          <img src="Photos/Dashboard.png" alt="Buddy Lock">
+        </div>
+      </div>
+    </div>
 
-          <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 8px rgba(255,149,0,0.10);display:flex;gap:16px;align-items:flex-start;">
-            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Student"
-                 style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--brand-tint);">
-            <div>
-              <strong style="display:block;margin-bottom:4px;">📚 The Student — Deep Focus Blocks</strong>
-              <p style="margin:0;font-size:0.9rem;color:#444;">Harry sets a 2-hour Timer Lock before every study session, blocking Instagram, TikTok, and YouTube. When the timer ends, apps unlock automatically — no willpower needed, just results.</p>
-            </div>
-          </div>
+    <!-- ⑤ USE CASES -->
+    <div class="use-cases-section">
+      <h2>Who is it for?</h2>
+      <p class="sub">Anyone who wants to spend less time on their phone — and actually stick to it.</p>
+      <div class="use-case-cards">
 
-          <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 8px rgba(255,149,0,0.10);display:flex;gap:16px;align-items:flex-start;">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professional"
-                 style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--brand-tint);">
-            <div>
-              <strong style="display:block;margin-bottom:4px;">💼 The Professional — Scheduled Work Hours</strong>
-              <p style="margin:0;font-size:0.9rem;color:#444;">Sarah schedules blocks from 9 AM–12 PM and 1 PM–5 PM, Monday through Friday. Distracting apps are automatically locked during work hours and unlocked at lunch and after hours.</p>
-            </div>
-          </div>
-
-          <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 8px rgba(255,149,0,0.10);display:flex;gap:16px;align-items:flex-start;">
-            <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Accountability pair"
-                 style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--brand-tint);">
-            <div>
-              <strong style="display:block;margin-bottom:4px;">🤝 The Accountability Pair — Buddy Lock</strong>
-              <p style="margin:0;font-size:0.9rem;color:#444;">James and his friend commit to a no-social-media week. James enables Buddy Lock — now only his friend's 4-digit code can unlock the apps early. No more "just 5 minutes."</p>
-            </div>
-          </div>
-
+        <div class="uc-card">
+          <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Student">
+          <strong>📚 The Student</strong>
+          <p>Harry sets a 2-hour Timer Lock before every study session, blocking Instagram and TikTok. When the timer ends, apps unlock automatically — no willpower needed.</p>
         </div>
 
-        <h2>How It Works</h2>
-        <ul>
-          <li><strong>Choose what to block:</strong> Select the apps and websites you find most distracting.</li>
-          <li><strong>Set a timer or schedule:</strong> Lock for a quick duration or set recurring daily blocks.</li>
-          <li><strong>Self-lock option:</strong> Keep full control — lock clears automatically when time is up.</li>
-          <li><strong>Buddy Lock option:</strong> Require a trusted buddy's code to end the lock early.</li>
-        </ul>
+        <div class="uc-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Professional">
+          <strong>💼 The Professional</strong>
+          <p>Sarah schedules blocks from 9 AM–12 PM and 1 PM–5 PM, Monday–Friday. Distracting apps lock automatically during work hours and unlock at lunch.</p>
+        </div>
 
-        <h2>Privacy</h2>
-        <p>Your data stays on your device. AppTimeOut collects nothing — no personal info, no browsing history, no tracking.</p>
+        <div class="uc-card">
+          <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Accountability pair">
+          <strong>🤝 The Committed Pair</strong>
+          <p>James enables Buddy Lock with his friend. Now only his friend's code can unlock the apps early. No more sneaking back to social media.</p>
+        </div>
 
       </div>
     </div>
 
-    <!-- Responsive: stack on mobile -->
-    <style>
-      #page-product { max-width: 960px; }
-      @media (max-width: 640px) {
-        #page-product { max-width: 720px; }
-        #page-product > div[style*="display:flex"] { flex-direction: column; align-items: center; }
-        #page-product > div[style*="display:flex"] > div[style*="position:sticky"] { position: static; }
-      }
-    </style>
+    <!-- ⑥ PRIVACY BANNER -->
+    <div class="privacy-banner">
+      <h2>🔐 Your privacy, respected.</h2>
+      <p>AppTimeOut never tracks your browsing or collects personal data beyond what you provide. Unlock codes are generated in-memory and never stored.</p>
+    </div>
 
   </div>
 
