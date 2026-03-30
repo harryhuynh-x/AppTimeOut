@@ -538,7 +538,24 @@
       font-weight: 500;
     }
 
-    .benefit-item .bi { font-size: 2rem; }
+    .benefit-item .bi {
+      width: 64px;
+      height: 64px;
+      border: 2px solid var(--brand-tint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .benefit-item .bi svg {
+      width: 30px;
+      height: 30px;
+      stroke: var(--brand-tint);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
 
     /* Feature rows */
     .feature-row {
@@ -679,10 +696,30 @@
 
     <!-- ② BENEFITS STRIP -->
     <div class="benefits">
-      <div class="benefit-item"><span class="bi">🎯</span>Better focus</div>
-      <div class="benefit-item"><span class="bi">🧠</span>Mental clarity</div>
-      <div class="benefit-item"><span class="bi">😴</span>Improved sleep</div>
-      <div class="benefit-item"><span class="bi">💪</span>Stronger habits</div>
+      <div class="benefit-item">
+        <span class="bi">
+          <!-- Target / Better focus -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg>
+        </span>Better focus
+      </div>
+      <div class="benefit-item">
+        <span class="bi">
+          <!-- Head with sparkle / Mental clarity -->
+          <svg viewBox="0 0 24 24"><path d="M9 3C6.24 3 4 5.24 4 8c0 2.02 1.19 3.76 2.93 4.6L7 20h10l.07-7.4A5.001 5.001 0 0 0 19 8c0-2.76-2.24-5-5-5"/><line x1="12" y1="3" x2="12" y2="1"/><line x1="16" y1="4.5" x2="17.5" y2="3"/><line x1="8" y1="4.5" x2="6.5" y2="3"/><line x1="7" y1="20" x2="17" y2="20"/></svg>
+        </span>Mental clarity
+      </div>
+      <div class="benefit-item">
+        <span class="bi">
+          <!-- Moon / Improved sleep -->
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>Improved sleep
+      </div>
+      <div class="benefit-item">
+        <span class="bi">
+          <!-- Two people / Stronger relationships -->
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.31 2.69-6 6-6s6 2.69 6 6"/><circle cx="17" cy="8" r="2.5"/><path d="M21 20c0-2.76-1.79-5-4-5.5"/></svg>
+        </span>Stronger relationships
+      </div>
     </div>
 
     <!-- ③ FEATURE: Timer & Schedule Lock -->
