@@ -552,10 +552,11 @@
 
     <!-- Responsive: stack on mobile -->
     <style>
-      @media (max-width: 580px) {
-        #page-product .two-col { flex-direction: column; }
-        #page-product .two-col .phone-img { position: static; text-align: center; }
-        #page-product .two-col .phone-img img { width: 200px; }
+      #page-product { max-width: 960px; }
+      @media (max-width: 640px) {
+        #page-product { max-width: 720px; }
+        #page-product > div[style*="display:flex"] { flex-direction: column; align-items: center; }
+        #page-product > div[style*="display:flex"] > div[style*="position:sticky"] { position: static; }
       }
     </style>
 
