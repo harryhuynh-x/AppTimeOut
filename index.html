@@ -545,12 +545,7 @@
   </nav>
 
   <style>
-    .uc-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--brand-tint); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 12px; }
 
-    .guide-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #f0e0d4; border-radius: 14px; text-decoration: none; color: #111; transition: transform .12s, box-shadow .12s; }
-    .guide-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(253,79,1,.12); }
-    .guide-card strong { display: block; margin-bottom: 4px; color: var(--brand-dark); }
-    .guide-card span { font-size: .88rem; color: #555; }
 
     /* Screenshots carry width/height attributes (prevents layout shift); keep their aspect ratio. */
     img[loading="lazy"] { height: auto; }
@@ -904,19 +899,19 @@
       <div class="use-case-cards">
 
         <div class="uc-card">
-          <div class="uc-avatar" aria-hidden="true">📚</div>
+          <img src="Photos/persona-student.jpg" alt="Student" width="56" height="56" loading="lazy">
           <strong>📚 The Student</strong>
           <p>Harry sets a 2-hour Timer Lock before every study session, blocking Instagram and TikTok. When the timer ends, apps unlock automatically — no willpower needed.</p>
         </div>
 
         <div class="uc-card">
-          <div class="uc-avatar" aria-hidden="true">💼</div>
+          <img src="Photos/persona-professional.jpg" alt="Professional" width="56" height="56" loading="lazy">
           <strong>💼 The Professional</strong>
           <p>Sarah schedules blocks from 9 AM–12 PM and 1 PM–5 PM, Monday–Friday. Distracting apps lock automatically during work hours and unlock at lunch.</p>
         </div>
 
         <div class="uc-card">
-          <div class="uc-avatar" aria-hidden="true">🤝</div>
+          <img src="Photos/persona-pair.jpg" alt="Accountability pair" width="56" height="56" loading="lazy">
           <strong>🤝 The Committed Pair</strong>
           <p>James enables Buddy Lock with his friend. Now only his friend's code can unlock the apps early. No more sneaking back to social media.</p>
         </div>
@@ -926,19 +921,6 @@
 
 
   
-    <!-- ⑥ GUIDES -->
-    <div style="max-width:860px;margin:0 auto;padding:8px 24px 56px">
-      <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:6px;text-align:center">Helpful guides</h2>
-      <p style="text-align:center;color:#555;margin:0 0 20px">Practical, step-by-step help for taking back your time.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
-        <a class="guide-card" href="block-apps-iphone/"><strong>Block apps on iPhone</strong><span>Timer or schedule, set up in minutes.</span></a>
-        <a class="guide-card" href="block-apps-android/"><strong>Block apps on Android</strong><span>How it works and what permission it needs.</span></a>
-        <a class="guide-card" href="block-social-media/"><strong>Stop doomscrolling</strong><span>Block Instagram, TikTok and X when you lose time.</span></a>
-        <a class="guide-card" href="screen-time-limits-not-working/"><strong>Why Screen Time limits fail</strong><span>And what makes a block actually hold.</span></a>
-        <a class="guide-card" href="app-blocker-accountability-partner/"><strong>Buddy Lock explained</strong><span>Let a friend hold the unlock code.</span></a>
-        <a class="guide-card" href="focus-timer-schedule-lock/"><strong>Focus timer &amp; schedule</strong><span>Block now, or set it once for the week.</span></a>
-      </div>
-    </div>
   </div>
 
   <!-- ══════════════════════════════════════════
