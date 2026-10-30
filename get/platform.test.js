@@ -20,4 +20,18 @@ assert.strictEqual(P.destination(macDesktop, 0), null, 'real Mac shows both butt
 assert.strictEqual(P.destination(windows, 0), null);
 assert.strictEqual(P.destination('', 0), null);
 assert.strictEqual(P.destination(undefined, undefined), null);
+
+// Campaign source is carried to the store
+assert.strictEqual(P.destination(iphone, 5, 'share'), P.IOS + '?ct=share');
+assert.strictEqual(P.destination(android, 5, 'share'),
+  P.ANDROID + '&referrer=' + encodeURIComponent('utm_source=share&utm_medium=smartlink'));
+assert.strictEqual(P.destination(android, 5), P.ANDROID, 'no source -> plain link');
+assert.strictEqual(P.destination(iphone, 5, ''), P.IOS);
+// Unsafe / odd sources are dropped, never echoed into the store URL
+assert.strictEqual(P.cleanSource('share&evil=1'), '');
+assert.strictEqual(P.cleanSource('<script>'), '');
+assert.strictEqual(P.cleanSource('a'.repeat(33)), '');
+assert.strictEqual(P.cleanSource('email_footer-2'), 'email_footer-2');
+assert.strictEqual(P.destination(iphone, 5, 'x y'), P.IOS);
+assert.strictEqual(P.destination(macDesktop, 0, 'share'), null);
 console.log('platform detection: all assertions passed');

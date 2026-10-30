@@ -31,7 +31,12 @@
   <script src="platform.js"></script>
   <script>
     (function () {
-      var dest = AppTimeOutPlatform.destination(navigator.userAgent || "", navigator.maxTouchPoints || 0);
+      var src = "";
+      try { src = new URLSearchParams(window.location.search).get("src") || ""; } catch (e) {}
+      // Keep the fallback buttons attributed too.
+      document.getElementById("ios").href = AppTimeOutPlatform.iosUrl(src);
+      document.getElementById("android").href = AppTimeOutPlatform.androidUrl(src);
+      var dest = AppTimeOutPlatform.destination(navigator.userAgent || "", navigator.maxTouchPoints || 0, src);
       var msg = document.getElementById("msg");
       if (dest) {
         // Phone or tablet: go straight to the matching store. The buttons stay as a fallback.
