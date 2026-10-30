@@ -6,6 +6,57 @@
   <meta name="apple-itunes-app" content="app-id=6755306490">
   <title>AppTimeOut</title>
   <meta name="description" content="Locks that hold — even against yourself. Block distracting apps and websites with Timer Lock, Schedule Lock, and Buddy Lock. Free to start, available on iOS and Android.">
+  <link rel="canonical" href="https://apptimeout.com/">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AppTimeOut",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "iOS, Android",
+  "description": "Block distracting apps and websites with Timer Lock, Schedule Lock and Buddy Lock. Free to start, available on iOS and Android.",
+  "url": "https://apptimeout.com/",
+  "image": "https://apptimeout.com/apptimeout-icon.png",
+  "downloadUrl": [
+    "https://apps.apple.com/us/app/apptimeout/id6755306490",
+    "https://play.google.com/store/apps/details?id=com.hhdev.apptimeout"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free to start; optional Pro subscription with a 2-week free trial."
+  }
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why aren't my apps being blocked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Make sure you've added apps to your block list before starting a lock, and that Screen Time permission was granted on first launch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does blocking work if I close the app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — blocking runs through iOS's Screen Time system, completely independent of the app."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I unlock early without a buddy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, for Timer Lock and Schedule Lock without Buddy Lock enabled. Once Buddy Lock is on, only your buddy's code can end it early."
+      }
+    }
+  ]
+}</script>
   <link rel="icon" type="image/png" href="apptimeout-icon.png?v=2">
   <link rel="apple-touch-icon" href="apptimeout-icon.png?v=2">
 
@@ -492,6 +543,12 @@
   </nav>
 
   <style>
+    /* ── QR code: only shown on wide (desktop) screens ── */
+    .qr-desktop { display: none; margin: 22px auto 0; text-align: center; }
+    .qr-desktop img { background: #fff; padding: 8px; border-radius: 12px; border: 1px solid #f0e0d4; }
+    .qr-desktop p { margin: 8px auto 0; max-width: 260px; font-size: 0.85rem; color: #555; }
+    @media (min-width: 900px) and (hover: hover) { .qr-desktop { display: block; } }
+
     /* ── Home page overrides ── */
     #page-product, #page-howto {
       max-width: 100%;
@@ -711,14 +768,14 @@
       <p>Locks that hold — even against yourself.</p>
       <p style="margin-top:20px;font-size:0.95rem;font-weight:600;color:#333">Available on iOS and Android</p>
       <div style="margin-top:18px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:center">
-        <a href="https://apps.apple.com/us/app/apptimeout/id6755306490?platform=iphone" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+        <a href="https://apps.apple.com/us/app/apptimeout/id6755306490?platform=iphone&ct=website_hero" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" style="display:inline-block;flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.271 3.714 1.338.104 2.715-.688 3.558-1.701"/></svg>
           <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.15">
             <span style="font-size:0.62rem;font-weight:400;letter-spacing:0.02em">Download on the</span>
             <span style="font-size:1.15rem;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;margin-top:1px">App Store</span>
           </span>
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.hhdev.apptimeout" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+        <a href="https://play.google.com/store/apps/details?id=com.hhdev.apptimeout&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
           <svg width="26" height="26" viewBox="0 0 512 512" style="display:inline-block;flex-shrink:0">
             <linearGradient id="playA" gradientUnits="userSpaceOnUse" x1="386.918" y1="431.982" x2="6.849" y2="52.001" gradientTransform="matrix(1 0 0 -1 0 512)">
               <stop offset="0" stop-color="#00a0ff"/><stop offset=".657" stop-color="#00a1ff"/><stop offset=".8323" stop-color="#00beff"/><stop offset="1" stop-color="#00d2ff"/>
@@ -742,6 +799,10 @@
             <span style="font-size:1.15rem;font-weight:500;font-family:-apple-system,BlinkMacSystemFont,sans-serif;margin-top:1px">Google Play</span>
           </span>
         </a>
+      </div>
+      <div class="qr-desktop">
+        <img src="get/qr.svg" width="132" height="132" alt="QR code: scan with your phone to get AppTimeOut">
+        <p>On a computer? <strong>Scan with your phone</strong> to get AppTimeOut for iPhone or Android.</p>
       </div>
       <p style="margin-top:16px;font-size:0.92rem;font-weight:600;color:var(--brand)">Free to start · Pro free for 2 weeks, then $4.99/year</p>
     </div>
@@ -1128,6 +1189,12 @@
   </div>
 
   <footer style="text-align:center;padding:24px 16px;font-size:0.8rem;color:#888;border-top:1px solid #f0e8d8;">
+    <a href="block-apps-iphone/" style="color:#FD4F01;text-decoration:none;">Block apps on iPhone</a>
+    &nbsp;·&nbsp;
+    <a href="app-blocker-accountability-partner/" style="color:#FD4F01;text-decoration:none;">Buddy Lock</a>
+    &nbsp;·&nbsp;
+    <a href="focus-timer-schedule-lock/" style="color:#FD4F01;text-decoration:none;">Focus timer &amp; schedule</a>
+    &nbsp;·&nbsp;
     <a href="privacy.html" style="color:#FD4F01;text-decoration:none;">Privacy Policy</a>
     &nbsp;·&nbsp;
     <a href="mailto:support@apptimeout.com" style="color:#FD4F01;text-decoration:none;">Contact</a>
