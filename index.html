@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-itunes-app" content="app-id=6755306490">
   <meta name="msvalidate.01" content="EB7205FFE3644EB9EBDBEA1A2B211D6C" />
-  <title>AppTimeOut</title>
+  <title>AppTimeOut — App Blocker &amp; Focus Timer for iPhone and Android</title>
+  <meta name="theme-color" content="#FD4F01">
   <meta name="description" content="Locks that hold — even against yourself. Block distracting apps and websites with Timer Lock, Schedule Lock, and Buddy Lock. Free to start, available on iOS and Android.">
   <link rel="canonical" href="https://apptimeout.com/">
   <script type="application/ld+json">{
@@ -58,8 +59,8 @@
     }
   ]
 }</script>
-  <link rel="icon" type="image/png" href="apptimeout-icon.png?v=2">
-  <link rel="apple-touch-icon" href="apptimeout-icon.png?v=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="apptimeout-icon-192.png">
+  <link rel="apple-touch-icon" href="apptimeout-icon-192.png">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -544,6 +545,21 @@
   </nav>
 
   <style>
+    /* Screenshots carry width/height attributes (prevents layout shift); keep their aspect ratio. */
+    img[loading="lazy"] { height: auto; }
+
+    /* ── Sticky "Get the app" bar on phones ── */
+    .sticky-cta { display: none; }
+    @media (max-width: 700px) {
+      .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 200; display: none; align-items: center; gap: 12px;
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid #f0e0d4; box-shadow: 0 -4px 16px rgba(0,0,0,.08); }
+      .sticky-cta.show { display: flex; }
+      .sticky-cta img { width: 40px; height: 40px; border-radius: 10px; }
+      .sticky-cta span { flex: 1; font-size: .9rem; line-height: 1.25; color: #222; }
+      .sticky-cta a { background: var(--brand); color: #fff; text-decoration: none; font-weight: 700; padding: 10px 16px; border-radius: 10px; white-space: nowrap; }
+      .sticky-cta button { background: none; border: 0; font-size: 1.3rem; color: #888; padding: 4px 6px; cursor: pointer; }
+    }
+
     /* ── QR code: only shown on wide (desktop) screens ── */
     .qr-desktop { display: none; margin: 22px auto 0; text-align: center; }
     .qr-desktop img { background: #fff; padding: 8px; border-radius: 12px; border: 1px solid #f0e0d4; }
@@ -763,20 +779,20 @@
     <!-- ① HERO -->
     <div class="hero">
       <div class="app-icon">
-        <img src="apptimeout-icon.png?v=2" alt="AppTimeOut" width="80" height="80">
+        <img src="apptimeout-icon-192.png" alt="AppTimeOut" width="80" height="80" fetchpriority="high">
       </div>
       <h1>Reclaim your day,<br><span>reclaim your attention.</span></h1>
       <p>Locks that hold — even against yourself.</p>
       <p style="margin-top:20px;font-size:0.95rem;font-weight:600;color:#333">Available on iOS and Android</p>
       <div style="margin-top:18px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:center">
-        <a href="https://apps.apple.com/us/app/apptimeout/id6755306490?platform=iphone&ct=website_hero" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+        <a href="https://apps.apple.com/us/app/apptimeout/id6755306490?platform=iphone&ct=website_hero" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" style="display:inline-block;flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.271 3.714 1.338.104 2.715-.688 3.558-1.701"/></svg>
           <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.15">
             <span style="font-size:0.62rem;font-weight:400;letter-spacing:0.02em">Download on the</span>
             <span style="font-size:1.15rem;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;margin-top:1px">App Store</span>
           </span>
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.hhdev.apptimeout&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
+        <a href="https://play.google.com/store/apps/details?id=com.hhdev.apptimeout&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:#000;color:#fff;border-radius:10px;text-decoration:none;transition:opacity 0.15s,transform 0.15s;" onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.04)'" onmouseout="this.style.opacity='1';this.style.transform='scale(1)'">
           <svg width="26" height="26" viewBox="0 0 512 512" style="display:inline-block;flex-shrink:0">
             <linearGradient id="playA" gradientUnits="userSpaceOnUse" x1="386.918" y1="431.982" x2="6.849" y2="52.001" gradientTransform="matrix(1 0 0 -1 0 512)">
               <stop offset="0" stop-color="#00a0ff"/><stop offset=".657" stop-color="#00a1ff"/><stop offset=".8323" stop-color="#00beff"/><stop offset="1" stop-color="#00d2ff"/>
@@ -839,7 +855,7 @@
     <!-- ③ FEATURE: Timer & Schedule Lock -->
     <div class="feature-row">
       <div class="feature-phone">
-        <img src="Photos/Dashboard.png" alt="AppTimeOut Dashboard">
+        <img src="Photos/dashboard.webp" alt="AppTimeOut Dashboard" width="660" height="1434" loading="lazy" decoding="async">
       </div>
       <div class="feature-text">
         <h2>Locks that <span>actually hold.</span></h2>
@@ -869,7 +885,7 @@
           </ul>
         </div>
         <div class="feature-phone">
-          <img src="Photos/Buddy.png" alt="Buddy Lock">
+          <img src="Photos/buddy.webp" alt="Buddy Lock" width="660" height="1434" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -918,7 +934,7 @@
     <!-- STEP 1: Create a lock -->
     <div class="feature-row">
       <div class="feature-phone">
-        <img src="Photos/Dashboard.png" alt="Timer and Schedule Lock">
+        <img src="Photos/dashboard.webp" alt="Timer and Schedule Lock" width="660" height="1434" loading="lazy" decoding="async">
       </div>
       <div class="feature-text">
         <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;color:var(--brand);text-transform:uppercase;margin-bottom:6px">Step 1</p>
@@ -948,7 +964,7 @@
           <div class="tip" style="margin-top:16px">💡 <strong>Free:</strong> Up to 3 apps &amp; 3 websites &nbsp;|&nbsp; <strong>Pro:</strong> Unlimited apps &amp; websites</div>
         </div>
         <div class="feature-phone">
-          <img src="Photos/Add Blocked.png" alt="Add apps and websites to block">
+          <img src="Photos/add-blocked.webp" alt="Add apps and websites to block" width="660" height="1434" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -956,7 +972,7 @@
     <!-- STEP 3: Add a buddy -->
     <div class="feature-row">
       <div class="feature-phone">
-        <img src="Photos/Buddy.png" alt="Buddy Lock setup">
+        <img src="Photos/buddy.webp" alt="Buddy Lock setup" width="660" height="1434" loading="lazy" decoding="async">
       </div>
       <div class="feature-text">
         <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;color:var(--brand);text-transform:uppercase;margin-bottom:6px">Step 3 — Pro</p>
@@ -985,7 +1001,7 @@
           </ul>
         </div>
         <div class="feature-phone">
-          <img src="Photos/Start Lock.png" alt="Start a Lock">
+          <img src="Photos/start-lock.webp" alt="Start a Lock" width="660" height="1434" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1004,7 +1020,7 @@
           </ul>
         </div>
         <div class="feature-phone">
-          <img src="Photos/Request Unlock.png" alt="Request Unlock Code">
+          <img src="Photos/request-unlock.webp" alt="Request Unlock Code" width="660" height="1434" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1189,6 +1205,13 @@
     </div>
   </div>
 
+  <div class="sticky-cta" id="sticky-cta" role="region" aria-label="Get the app">
+    <img src="apptimeout-icon-192.png" alt="" width="40" height="40">
+    <span><strong>AppTimeOut</strong><br>Free on iPhone &amp; Android</span>
+    <a href="get/?src=sticky_bar">Get the app</a>
+    <button type="button" aria-label="Dismiss" id="sticky-close">&times;</button>
+  </div>
+
   <footer style="text-align:center;padding:24px 16px;font-size:0.8rem;color:#888;border-top:1px solid #f0e8d8;">
     <a href="block-apps-iphone/" style="color:#FD4F01;text-decoration:none;">Block apps on iPhone</a>
     &nbsp;·&nbsp;
@@ -1202,12 +1225,51 @@
   </footer>
 
   <script>
-    function showPage(name, btn) {
+    // Pages live behind tabs on one URL; the hash (#howto, #pricing, #support) makes each tab linkable,
+    // keeps the Back button working and lets the title change per page.
+    var PAGE_TITLES = {
+      product: 'AppTimeOut \u2014 App Blocker & Focus Timer for iPhone and Android',
+      howto: 'How to use AppTimeOut \u2014 Timer, Schedule and Buddy Lock',
+      pricing: 'Pricing \u2014 AppTimeOut',
+      support: 'Contact Us \u2014 AppTimeOut'
+    };
+
+    // Phones: show the sticky bar once the visitor scrolls past the hero (unless they closed it before).
+    (function () {
+      var bar = document.getElementById('sticky-cta');
+      var closed = false;
+      try { closed = sessionStorage.getItem('stickyClosed') === '1'; } catch (e) {}
+      document.getElementById('sticky-close').addEventListener('click', function () {
+        bar.classList.remove('show'); closed = true;
+        try { sessionStorage.setItem('stickyClosed', '1'); } catch (e) {}
+      });
+      window.addEventListener('scroll', function () {
+        if (!closed) bar.classList.toggle('show', window.scrollY > 420);
+      }, { passive: true });
+    })();
+
+    function renderPage(name) {
+      if (!document.getElementById('page-' + name)) name = 'product';
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => {
+        b.classList.toggle('active', (b.getAttribute('onclick') || '').indexOf("'" + name + "'") > -1);
+      });
       document.getElementById('page-' + name).classList.add('active');
-      btn.classList.add('active');
+      document.title = PAGE_TITLES[name] || PAGE_TITLES.product;
     }
+
+    function showPage(name, btn) {
+      var hash = name === 'product' ? '' : '#' + name;
+      if (location.hash !== hash) {
+        // Creates a history entry so Back returns to the previous tab.
+        history.pushState(null, '', location.pathname + location.search + hash);
+      }
+      renderPage(name);
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('popstate', function () { renderPage(location.hash.replace('#', '') || 'product'); });
+    renderPage(location.hash.replace('#', '') || 'product');
 
     document.getElementById('signup-form').addEventListener('submit', async function(e) {
       e.preventDefault();
