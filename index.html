@@ -46,7 +46,7 @@
       "name": "Does blocking work if I close the app?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — blocking runs through iOS's Screen Time system, completely independent of the app."
+        "text": "Yes. On iPhone, blocking runs through iOS's Screen Time system. On Android, it runs through the Accessibility Service you turn on once. Either way it keeps working when the app is closed."
       }
     },
     {
@@ -55,6 +55,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes, for Timer Lock and Schedule Lock without Buddy Lock enabled. Once Buddy Lock is on, only your buddy's code can end it early."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I sign out or delete my account during a lock?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not while a lock is active, otherwise signing out would end the lock. Finish the lock (or unlock it with your buddy's code), then you can sign out or delete your account."
       }
     }
   ]
@@ -867,7 +875,12 @@
         <ul>
           <li>⏱ <strong>Timer Lock</strong> — block for any duration, clears automatically</li>
           <li>📅 <strong>Schedule Lock</strong> — recurring daily blocks on your schedule</li>
-          <li>🔒 <strong>Self-Lock</strong> — you set it, iOS enforces it</li>
+          <li>🔒 <strong>Self-Lock</strong> — you set it, your phone enforces it</li>
+          <li>🌙 <strong>Overnight slots</strong> — block from 10 PM to 6 AM in one schedule</li>
+          <li>🔥 <strong>Day streak</strong> and a "blocked today" total on your dashboard</li>
+          <li>📲 <strong>Lock status widget</strong> — see your lock and streak from your home screen</li>
+          <li>✅ A <strong>"You focused for…" summary</strong> when a lock ends</li>
+          <li>🔔 Optional, gentle reminders — never a stream of notifications</li>
         </ul>
       </div>
     </div>
@@ -1038,11 +1051,15 @@
       </div>
       <div style="margin-bottom:20px">
         <p style="font-weight:700;margin-bottom:4px">Does blocking work if I close the app?</p>
-        <p style="color:#555;line-height:1.7">Yes — blocking runs through iOS's Screen Time system, completely independent of the app.</p>
+        <p style="color:#555;line-height:1.7">Yes. On iPhone, blocking runs through iOS's Screen Time system. On Android, it runs through the Accessibility Service you turn on once. Either way it keeps working when the app is closed.</p>
       </div>
       <div>
         <p style="font-weight:700;margin-bottom:4px">Can I unlock early without a buddy?</p>
         <p style="color:#555;line-height:1.7">Yes, for Timer Lock and Schedule Lock without Buddy Lock enabled. Once Buddy Lock is on, only your buddy's code can end it early.</p>
+      </div>
+      <div style="margin-top:20px">
+        <p style="font-weight:700;margin-bottom:4px">Can I sign out or delete my account during a lock?</p>
+        <p style="color:#555;line-height:1.7">Not while a lock is active — otherwise signing out would end the lock. Finish the lock (or unlock it with your buddy's code), then you can sign out or delete your account.</p>
       </div>
     </div>
 
