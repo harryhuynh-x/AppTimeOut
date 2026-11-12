@@ -24,3 +24,16 @@ the next sync.
 - **11/05/2026** (`5fade52`): added the 1.7 features (overnight slots, streak and blocked-today total, lock status widget, lock summary, optional reminders) to the homepage and the schedule guide; made the "Does blocking work if I close the app?" FAQ platform-neutral; added the FAQ "Can I sign out or delete my account during a lock?" (also in the FAQPage JSON-LD); `delete-account.html` now explains that deleting an account or signing out waits until an active lock ends.
 - **Deploy check**: after a push, the Action finishes in ~12 s; the live site can take up to a minute to show the change.
 
+
+## Search Console indexing report — what is expected (checked 11/12/2026)
+
+Property: **URL-prefix** `https://apptimeout.com/` (the `sc-domain:` form shows "no access"). On 11/12 it listed 8 indexed / 6 not indexed. The Google email "New reasons preventing your pages from being indexed" (11/11) was about these, all benign:
+
+| Reason | URL(s) | Verdict |
+|---|---|---|
+| Excluded by 'noindex' tag (3) | `/get/?c=…` campaign links | **Intentional.** `/get/index.html` is the store-redirect page and is `noindex` on purpose (also `404.html`). Never remove it. |
+| Alternate page with proper canonical tag (1) | `/?from=AppAgg.com&utm_…` | **Correct.** Tracking-suffix copy of the homepage; the page's canonical points to `https://apptimeout.com/`. |
+| Duplicate without user-selected canonical (1) | `/index.html` | Cause found: `privacy.html` / `delete-account.html` linked to `index.html`. **Fixed 11/12** (links now `/`). The live `index.html` already has the canonical, so Google should reclassify it on its next crawl. |
+| Crawled – currently not indexed (1) | `/block-apps-iphone/` | Google's quality/priority call (page is ~390 words, same as the Android guide). Not an error. Page is linked from the homepage and all guides and is in the sitemap. Optional: add unique content, then Request indexing. |
+
+Rules to keep: link to the homepage as `/` (never `index.html`); every indexable page keeps a self-referencing `<link rel="canonical">` with the `https://apptimeout.com/...` form; only `404.html` and `get/` are `noindex`; campaign links go through `/get/?c=…` or `?src=…`. Untracked `.claude/worktrees/` folders on this machine are not deployed (the Action ships tracked files only).
