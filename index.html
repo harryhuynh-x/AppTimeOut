@@ -782,7 +782,7 @@
 
     /* Hero phones */
     .hero-phones { display: flex; justify-content: center; align-items: flex-end; gap: 18px; margin: 40px auto 0; max-width: 760px; }
-    .hero-phones img { width: 26%; height: auto; border-radius: 28px; box-shadow: 0 24px 56px rgba(0,0,0,0.16), 0 4px 14px rgba(253,79,1,0.14); background: #fff; }
+    .hero-phones img { width: 26%; height: auto; border-radius: 28px; box-shadow: 0 24px 56px rgba(0,0,0,0.16), 0 4px 14px rgba(253,79,1,0.14); background: #f3e9df; }
     .hero-phones img.main { width: 31%; margin-bottom: 0; }
     .hero-phones img.side { margin-bottom: -18px; transform: scale(0.96); }
     .hero-phones-wrap { background: var(--brand-bg); padding: 0 24px; overflow: hidden; max-height: 470px; }
@@ -804,7 +804,7 @@
     .gtabs button { border: 0; background: none; padding: 9px 22px; border-radius: 999px; font-weight: 700; font-size: 0.92rem; color: #555; cursor: pointer; }
     .gtabs button.on { background: var(--brand); color: #fff; }
     .gtrack { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 24px 28px; -webkit-overflow-scrolling: touch; }
-    .gtrack img { width: 250px; flex: 0 0 auto; height: auto; border-radius: 22px; scroll-snap-align: center; box-shadow: 0 14px 40px rgba(0,0,0,0.14); background: #fff; }
+    .gtrack img { width: 250px; flex: 0 0 auto; height: auto; border-radius: 22px; scroll-snap-align: center; box-shadow: 0 14px 40px rgba(0,0,0,0.14); background: #ece4d8; min-height: 200px; }
     @media (min-width: 1100px) { .gtrack { justify-content: center; } }
     .gtrack[hidden] { display: none; }
 
@@ -884,9 +884,9 @@
     </div>
     <div class="hero-phones-wrap">
       <div class="hero-phones">
-        <img class="side" src="Photos/reports.webp" alt="Reports: hours your apps stayed blocked, by day, week and month" width="660" height="960" loading="lazy" decoding="async">
+        <img class="side" src="Photos/reports.webp" alt="Reports: hours your apps stayed blocked, by day, week and month" width="660" height="960" decoding="async">
         <img class="main" src="Photos/dashboard.webp" alt="AppTimeOut dashboard with day streak, Timer Lock and Schedule Lock" width="660" height="1434" fetchpriority="high" decoding="async">
-        <img class="side" src="Photos/add-blocked.webp" alt="Manage Blocks: apps and websites you choose to block" width="660" height="1434" loading="lazy" decoding="async">
+        <img class="side" src="Photos/add-blocked.webp" alt="Manage Blocks: apps and websites you choose to block" width="660" height="1434" decoding="async">
       </div>
     </div>
 
@@ -1029,16 +1029,16 @@
         <button type="button" id="gt-android" role="tab" aria-selected="false" onclick="showGallery('android')">Android</button>
       </div>
       <div class="gtrack" id="g-ios">
-        <img src="Photos/gallery/ios-1.webp" alt="Let a friend hold the key: Buddy Lock on iPhone" width="540" height="1174" loading="lazy" decoding="async">
-        <img src="Photos/gallery/ios-2.webp" alt="Reports on iPhone: see the hours you got back" width="540" height="1174" loading="lazy" decoding="async">
-        <img src="Photos/gallery/ios-3.webp" alt="Block the apps that tempt you on iPhone" width="540" height="1174" loading="lazy" decoding="async">
-        <img src="Photos/gallery/ios-4.webp" alt="Weekly Schedule Lock on iPhone" width="540" height="1174" loading="lazy" decoding="async">
+        <img src="Photos/gallery/ios-1.webp" alt="Let a friend hold the key: Buddy Lock on iPhone" width="540" height="1174" decoding="async">
+        <img src="Photos/gallery/ios-2.webp" alt="Reports on iPhone: see the hours you got back" width="540" height="1174" decoding="async">
+        <img src="Photos/gallery/ios-3.webp" alt="Block the apps that tempt you on iPhone" width="540" height="1174" decoding="async">
+        <img src="Photos/gallery/ios-4.webp" alt="Weekly Schedule Lock on iPhone" width="540" height="1174" decoding="async">
       </div>
       <div class="gtrack" id="g-android" hidden>
-        <img src="Photos/gallery/android-1.webp" alt="Let a friend hold the key: Buddy Lock on Android" width="540" height="1200" loading="lazy" decoding="async">
-        <img src="Photos/gallery/android-2.webp" alt="Reports on Android: see the hours you got back" width="540" height="1200" loading="lazy" decoding="async">
-        <img src="Photos/gallery/android-3.webp" alt="Block the apps that tempt you on Android" width="540" height="1200" loading="lazy" decoding="async">
-        <img src="Photos/gallery/android-4.webp" alt="Weekly Schedule Lock on Android" width="540" height="1200" loading="lazy" decoding="async">
+        <img src="Photos/gallery/android-1.webp" alt="Let a friend hold the key: Buddy Lock on Android" width="540" height="1200" decoding="async">
+        <img src="Photos/gallery/android-2.webp" alt="Reports on Android: see the hours you got back" width="540" height="1200" decoding="async">
+        <img src="Photos/gallery/android-3.webp" alt="Block the apps that tempt you on Android" width="540" height="1200" decoding="async">
+        <img src="Photos/gallery/android-4.webp" alt="Weekly Schedule Lock on Android" width="540" height="1200" decoding="async">
       </div>
     </div>
 
