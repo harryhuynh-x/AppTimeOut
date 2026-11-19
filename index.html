@@ -18,6 +18,12 @@
   "description": "Block distracting apps and websites with Timer Lock, Schedule Lock and Buddy Lock. Free to start, available on iOS and Android.",
   "url": "https://apptimeout.com/",
   "image": "https://apptimeout.com/apptimeout-icon.png",
+  "screenshot": [
+    "https://apptimeout.com/Photos/gallery/ios-1.webp",
+    "https://apptimeout.com/Photos/gallery/ios-2.webp",
+    "https://apptimeout.com/Photos/gallery/ios-3.webp",
+    "https://apptimeout.com/Photos/gallery/ios-4.webp"
+  ],
   "downloadUrl": [
     "https://apps.apple.com/us/app/apptimeout/id6755306490",
     "https://play.google.com/store/apps/details?id=com.hhdev.apptimeout"
@@ -556,7 +562,7 @@
 
 
     /* Screenshots carry width/height attributes (prevents layout shift); keep their aspect ratio. */
-    img[loading="lazy"] { height: auto; }
+    img[loading="lazy"], .feature-phone img { height: auto; }
 
     /* ── Sticky "Get the app" bar on phones ── */
     .sticky-cta { display: none; }
@@ -771,8 +777,49 @@
     .uc-card strong { display: block; margin-bottom: 6px; font-size: 0.95rem; }
     .uc-card p { margin: 0; font-size: 0.875rem; color: #555; line-height: 1.6; }
 
+
+    /* Hero phones */
+    .hero-phones { display: flex; justify-content: center; align-items: flex-end; gap: 18px; margin: 40px auto 0; max-width: 760px; }
+    .hero-phones img { width: 26%; height: auto; border-radius: 28px; box-shadow: 0 24px 56px rgba(0,0,0,0.16), 0 4px 14px rgba(253,79,1,0.14); background: #fff; }
+    .hero-phones img.main { width: 31%; margin-bottom: 0; }
+    .hero-phones img.side { margin-bottom: -18px; transform: scale(0.96); }
+    .hero-phones-wrap { background: var(--brand-bg); padding: 0 24px; overflow: hidden; max-height: 470px; }
+
+    /* How it works */
+    .steps-section { padding: 56px 24px 8px; max-width: 960px; margin: 0 auto; text-align: center; }
+    .steps-section h2, .gallery-section h2, .final-cta h2 { font-size: 1.9rem; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.5px; }
+    .steps-section .sub, .gallery-section .sub { color: #666; margin: 0 0 32px; }
+    .steps { display: flex; gap: 20px; flex-wrap: wrap; text-align: left; }
+    .step { flex: 1; min-width: 220px; background: #fff; border-radius: 18px; padding: 22px; box-shadow: 0 2px 16px rgba(253,79,1,0.10); }
+    .step .n { display: inline-flex; width: 34px; height: 34px; border-radius: 50%; background: var(--brand); color: #fff; font-weight: 800; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .step strong { display: block; font-size: 1.02rem; margin-bottom: 4px; }
+    .step p { margin: 0; font-size: 0.9rem; color: #555; line-height: 1.55; }
+
+    /* Gallery */
+    .gallery-section { padding: 56px 0 24px; text-align: center; background: #f7f3ec; margin-top: 40px; }
+    .gallery-section .sub { padding: 0 24px; }
+    .gtabs { display: inline-flex; background: #fff; border-radius: 999px; padding: 4px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .gtabs button { border: 0; background: none; padding: 9px 22px; border-radius: 999px; font-weight: 700; font-size: 0.92rem; color: #555; cursor: pointer; }
+    .gtabs button.on { background: var(--brand); color: #fff; }
+    .gtrack { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 24px 28px; -webkit-overflow-scrolling: touch; }
+    .gtrack img { width: 250px; flex: 0 0 auto; height: auto; border-radius: 22px; scroll-snap-align: center; box-shadow: 0 14px 40px rgba(0,0,0,0.14); background: #fff; }
+    @media (min-width: 1100px) { .gtrack { justify-content: center; } }
+    .gtrack[hidden] { display: none; }
+
+    /* Final CTA */
+    .final-cta { text-align: center; padding: 64px 24px 72px; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: #fff; }
+    .final-cta p { max-width: 520px; margin: 0 auto 24px; opacity: .95; font-size: 1.05rem; line-height: 1.6; }
+    .final-cta .btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .final-cta .btns a { background: #fff; color: var(--brand-dark); font-weight: 800; padding: 13px 24px; border-radius: 12px; text-decoration: none; }
+    .final-cta small { display: block; margin-top: 16px; opacity: .9; }
+
     /* Responsive */
     @media (max-width: 640px) {
+      .hero-phones { gap: 10px; margin-top: 28px; }
+      .hero-phones-wrap { max-height: 300px; }
+      .hero-phones img { border-radius: 18px; }
+      .hero-phones img.side { margin-bottom: -10px; }
+      .gtrack img { width: 62vw; }
       .hero h1 { font-size: 2rem; }
       .feature-row, .feature-row.alt-bg .feature-row-inner { flex-direction: column; gap: 32px; }
       .feature-row.reverse { flex-direction: column; }
@@ -833,6 +880,13 @@
       </div>
       <p style="margin-top:16px;font-size:0.92rem;font-weight:600;color:var(--brand)">Free to start · Pro free for 2 weeks, then $4.99/year</p>
     </div>
+    <div class="hero-phones-wrap">
+      <div class="hero-phones">
+        <img class="side" src="Photos/reports.webp" alt="Reports: hours your apps stayed blocked, by day, week and month" width="660" height="960" loading="lazy" decoding="async">
+        <img class="main" src="Photos/dashboard.webp" alt="AppTimeOut dashboard with day streak, Timer Lock and Schedule Lock" width="660" height="1434" fetchpriority="high" decoding="async">
+        <img class="side" src="Photos/add-blocked.webp" alt="Manage Blocks: apps and websites you choose to block" width="660" height="1434" loading="lazy" decoding="async">
+      </div>
+    </div>
 
     <!-- ② BENEFITS STRIP -->
     <div class="benefits">
@@ -859,6 +913,18 @@
           <!-- Two people / Stronger relationships -->
           <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.31 2.69-6 6-6s6 2.69 6 6"/><circle cx="17" cy="8" r="2.5"/><path d="M21 20c0-2.76-1.79-5-4-5.5"/></svg>
         </span>Stronger relationships
+      </div>
+    </div>
+
+
+    <!-- HOW IT WORKS (3 steps) -->
+    <div class="steps-section">
+      <h2>Up and running in <span style="color:var(--brand)">one minute.</span></h2>
+      <p class="sub">No account needed to start. Three taps and your distractions are out of reach.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><strong>Pick what tempts you</strong><p>Choose the apps and websites you lose time to. Free includes 3 of each.</p></div>
+        <div class="step"><span class="n">2</span><strong>Start a lock</strong><p>A quick Timer Lock now, or a Schedule Lock that runs on its own every week.</p></div>
+        <div class="step"><span class="n">3</span><strong>Let a friend hold the key</strong><p>With Buddy Lock, only your friend's 4-digit code ends it early. No willpower needed.</p></div>
       </div>
     </div>
 
@@ -900,8 +966,28 @@
           </ul>
         </div>
         <div class="feature-phone">
-          <img src="Photos/buddy.webp" alt="Buddy Lock" width="660" height="1434" loading="lazy" decoding="async">
+          <img src="Photos/buddy.webp" alt="Buddy Lock" width="660" height="840" loading="lazy" decoding="async">
         </div>
+      </div>
+    </div>
+
+
+    <!-- ④b FEATURE: Reports -->
+    <div class="feature-row reverse">
+      <div class="feature-phone">
+        <img src="Photos/reports.webp" alt="Reports screen with a weekly bar chart and average per day" width="660" height="960" loading="lazy" decoding="async">
+      </div>
+      <div class="feature-text">
+        <h2>See the hours <span>you got back.</span></h2>
+        <p>
+          Reports turn blocked time into something you can see. Watch your week add up and notice what a few focused sessions are really worth.
+        </p>
+        <ul>
+          <li>📊 <strong>Day, Week and Month</strong> charts of time your apps stayed blocked</li>
+          <li>📈 An <strong>average-per-day</strong> line to beat next week</li>
+          <li>☁️ History saved to your account, so it follows you to a new phone</li>
+          <li>🔥 Keep your <strong>day streak</strong> going from the dashboard</li>
+        </ul>
       </div>
     </div>
 
@@ -932,8 +1018,39 @@
       </div>
     </div>
 
+    <!-- GALLERY -->
+    <div class="gallery-section" id="gallery">
+      <h2>See it in action</h2>
+      <p class="sub">The same locks on iPhone and Android.</p>
+      <div class="gtabs" role="tablist" aria-label="Choose a platform">
+        <button type="button" class="on" id="gt-ios" role="tab" aria-selected="true" onclick="showGallery('ios')">iPhone</button>
+        <button type="button" id="gt-android" role="tab" aria-selected="false" onclick="showGallery('android')">Android</button>
+      </div>
+      <div class="gtrack" id="g-ios">
+        <img src="Photos/gallery/ios-1.webp" alt="Let a friend hold the key: Buddy Lock on iPhone" width="540" height="1174" loading="lazy" decoding="async">
+        <img src="Photos/gallery/ios-2.webp" alt="Reports on iPhone: see the hours you got back" width="540" height="1174" loading="lazy" decoding="async">
+        <img src="Photos/gallery/ios-3.webp" alt="Block the apps that tempt you on iPhone" width="540" height="1174" loading="lazy" decoding="async">
+        <img src="Photos/gallery/ios-4.webp" alt="Weekly Schedule Lock on iPhone" width="540" height="1174" loading="lazy" decoding="async">
+      </div>
+      <div class="gtrack" id="g-android" hidden>
+        <img src="Photos/gallery/android-1.webp" alt="Let a friend hold the key: Buddy Lock on Android" width="540" height="1200" loading="lazy" decoding="async">
+        <img src="Photos/gallery/android-2.webp" alt="Reports on Android: see the hours you got back" width="540" height="1200" loading="lazy" decoding="async">
+        <img src="Photos/gallery/android-3.webp" alt="Block the apps that tempt you on Android" width="540" height="1200" loading="lazy" decoding="async">
+        <img src="Photos/gallery/android-4.webp" alt="Weekly Schedule Lock on Android" width="540" height="1200" loading="lazy" decoding="async">
+      </div>
+    </div>
 
-  
+    <!-- FINAL CTA -->
+    <div class="final-cta">
+      <h2>Take your attention back today.</h2>
+      <p>Block your first app in under a minute. Free to start on iPhone and Android.</p>
+      <div class="btns">
+        <a href="https://apps.apple.com/us/app/apptimeout/id6755306490?platform=iphone&ct=website_bottom" target="_blank" rel="noopener">Download on the App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.hhdev.apptimeout&referrer=utm_source%3Dwebsite%26utm_medium%3Dbottom" target="_blank" rel="noopener">Get it on Google Play</a>
+      </div>
+      <small>Pro free for 2 weeks, then $4.99/year. Cancel anytime in your store settings.</small>
+    </div>
+
   </div>
 
   <!-- ══════════════════════════════════════════
@@ -988,7 +1105,7 @@
     <!-- STEP 3: Add a buddy -->
     <div class="feature-row">
       <div class="feature-phone">
-        <img src="Photos/buddy.webp" alt="Buddy Lock setup" width="660" height="1434" loading="lazy" decoding="async">
+        <img src="Photos/buddy.webp" alt="Buddy Lock setup" width="660" height="840" loading="lazy" decoding="async">
       </div>
       <div class="feature-text">
         <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;color:var(--brand);text-transform:uppercase;margin-bottom:6px">Step 3 — Pro</p>
@@ -1250,6 +1367,15 @@
     <a href="mailto:support@apptimeout.com" style="color:#FD4F01;text-decoration:none;">Contact</a>
   </footer>
 
+  <script>
+    function showGallery(which) {
+      ['ios', 'android'].forEach(function (k) {
+        document.getElementById('g-' + k).hidden = (k !== which);
+        var b = document.getElementById('gt-' + k);
+        b.classList.toggle('on', k === which); b.setAttribute('aria-selected', k === which ? 'true' : 'false');
+      });
+    }
+  </script>
   <script>
     // Pages live behind tabs on one URL; the hash (#howto, #pricing, #support) makes each tab linkable,
     // keeps the Back button working and lets the title change per page.
