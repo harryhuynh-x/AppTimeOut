@@ -695,6 +695,8 @@
       padding: 0 24px;
     }
 
+    .feature-row > .feature-row-inner { display: flex; align-items: center; gap: 64px; width: 100%; }
+
     .feature-phone {
       flex-shrink: 0;
       text-align: center;
@@ -821,7 +823,7 @@
       .hero-phones img.side { margin-bottom: -10px; }
       .gtrack img { width: 62vw; }
       .hero h1 { font-size: 2rem; }
-      .feature-row, .feature-row.alt-bg .feature-row-inner { flex-direction: column; gap: 32px; }
+      .feature-row, .feature-row.alt-bg .feature-row-inner, .feature-row > .feature-row-inner { flex-direction: column; gap: 32px; }
       .feature-row.reverse { flex-direction: column; }
       .use-case-cards { flex-direction: column; }
       .benefits { gap: 24px; }
@@ -1128,7 +1130,7 @@
           <h2>Start a <span>lock.</span></h2>
           <p>Once your block list is ready and your buddy is set, activate a lock. Blocked apps and websites are restricted immediately — and stay that way.</p>
           <ul>
-            <li>Tap <strong>Start Lock</strong> on the Timer or Schedule card</li>
+            <li>Tap the <strong>play button</strong> on the Timer card, or <strong>Enable Self-Lock</strong> / <strong>Buddy-Lock</strong> on the Schedule card</li>
             <li>The lock activates instantly across all blocked apps and websites</li>
             <li>With Buddy Lock on, only your buddy's code can end it early</li>
           </ul>
@@ -1153,7 +1155,7 @@
           </ul>
         </div>
         <div class="feature-phone">
-          <img src="Photos/request-unlock.webp" alt="Request Unlock Code" width="660" height="1434" loading="lazy" decoding="async">
+          <img src="Photos/request-unlock.webp" alt="Buddy Unlock: request an unlock code from your buddy" width="660" height="880" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
